@@ -39,9 +39,9 @@ val Typography = Typography(
     ),
     // p/small
     body2 = TextStyle(
-        fontSize = 12.sp,
+        fontSize = 14.sp,
         fontWeight = FontWeight.Normal,
-        lineHeight = 21.sp,
+        lineHeight = 20.sp,
     ),
     // o/card
     subtitle1 = TextStyle(
