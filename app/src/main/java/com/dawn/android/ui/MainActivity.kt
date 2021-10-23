@@ -1,4 +1,4 @@
-package com.dawn.android
+package com.dawn.android.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
