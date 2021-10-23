@@ -8,7 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dawn.android.plan.ui.HomePage
+import com.dawn.android.ui.theme.White
 
 @Composable
 fun App() {
@@ -26,7 +29,8 @@ fun AppContent() {
     Scaffold(
         bottomBar = {
             AppBottomNavigation()
-        }
+        },
+        backgroundColor = White,
     ) {
         Box(
             modifier = Modifier
@@ -37,7 +41,9 @@ fun AppContent() {
                 navController = navController,
                 startDestination = BottomNavItems.Home.route,
             ) {
-                
+                composable(route = BottomNavItems.Home.route) {
+                    HomePage()
+                }
             }
         }
     }
