@@ -11,10 +11,13 @@ import androidx.compose.material.icons.twotone.Face
 import androidx.compose.material.icons.twotone.Home
 import androidx.compose.material.icons.twotone.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.dawn.android.R
 import com.dawn.android.ui.theme.DawnTheme
 import com.dawn.android.ui.theme.White
@@ -62,12 +65,13 @@ enum class BottomNavItems(
 @Composable
 fun AppBottomNavigation() {
     val navController = LocalNav.current
-    val route = navController.currentDestination?.route
+    navController.currentBackStackEntryAsState()
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
     BottomNavigation(
         backgroundColor = White,
     ) {
         BottomNavItems.values().forEach { item ->
-            val selected = item.route == route
+            val selected = currentBackStackEntry?.destination?.hierarchy?.any { it.route == item.route } == true
             BottomNavigationItem(
                 selected = selected,
                 onClick = {
