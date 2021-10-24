@@ -9,6 +9,7 @@ data class PlanDetailUIModel(
     val creatorName: String,
     val creatorProfileImageUrl: String,
     val bookmarkCount: Int,
+    val bookmarked: Boolean,
     val days: List<PlanDayUIModel>,
     val createdAt: Instant,
     val places: List<String>,
