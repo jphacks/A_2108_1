@@ -1,4 +1,4 @@
-package com.dawn.android.plan.ui
+package com.dawn.android.plan.timeline.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

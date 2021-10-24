@@ -1,4 +1,4 @@
-package com.dawn.android.plan.ui
+package com.dawn.android.plan.timeline.ui
 
 import java.time.Instant
 
