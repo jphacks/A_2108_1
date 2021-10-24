@@ -1,6 +1,13 @@
 package com.dawn.android.plan.detail.ui
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.dawn.android.common.ui.BackNavigationButton
+import com.dawn.android.ui.LocalNav
 import java.time.Instant
 import java.time.LocalTime
 
@@ -8,6 +15,7 @@ import java.time.LocalTime
 fun PlanDetailPage(
     planId: Long,
 ) {
+    val navController = LocalNav.current
     // TODO: get from api
     val uiModel = PlanDetailUIModel(
         title = "会津塩川花火大会の旅",
@@ -67,10 +75,23 @@ fun PlanDetailPage(
         timeSpans = listOf("日帰り"),
         cost = 10000,
     )
-    PlanDetailTemplate(
-        uiModel = uiModel,
-        onClickBack = { /*TODO*/ },
-        onClickShare = { /*TODO*/ },
-        onClickBookmark = { /*TODO*/ },
-    )
+    Box(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        PlanDetailTemplate(
+            uiModel = uiModel,
+            onClickShare = { /*TODO*/ },
+            onClickBookmark = { /*TODO*/ },
+        )
+        Box(
+            modifier = Modifier.padding(
+                start = 16.dp,
+                top = 8.dp,
+            )
+        ) {
+            BackNavigationButton {
+                navController.popBackStack()
+            }
+        }
+    }
 }

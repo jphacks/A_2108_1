@@ -3,7 +3,6 @@ package com.dawn.android.plan.detail.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -48,7 +47,6 @@ import java.time.LocalTime
 @Composable
 fun PlanDetailTemplate(
     uiModel: PlanDetailUIModel,
-    onClickBack: () -> Unit,
     onClickShare: () -> Unit,
     onClickBookmark: () -> Unit,
 ) {
@@ -276,14 +274,6 @@ fun PlanDetailTemplate(
                         ),
                 )
             }
-        }
-        Box(
-            modifier = Modifier.padding(
-                start = 16.dp,
-                top = 8.dp,
-            )
-        ) {
-            BackNavigationButton(onClick = onClickBack)
         }
     }
 }
@@ -545,7 +535,6 @@ fun PlanDetailPreview() {
     DawnTheme {
         PlanDetailTemplate(
             uiModel = uiModel,
-            onClickBack = {},
             onClickShare = {},
             onClickBookmark = {},
         )
