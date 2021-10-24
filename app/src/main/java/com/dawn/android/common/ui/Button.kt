@@ -170,6 +170,7 @@ fun BookmarkButton(
             width = 94.dp,
             height = 44.dp,
         ),
+        elevation = ButtonDefaults.elevation(0.dp)
     ) {
         Column {
             Icon(
