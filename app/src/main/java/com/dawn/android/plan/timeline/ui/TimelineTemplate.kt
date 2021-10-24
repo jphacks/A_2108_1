@@ -2,6 +2,7 @@ package com.dawn.android.plan.timeline.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -48,6 +49,7 @@ fun TimelineTemplate(
     uiModel: TimelineUIModel,
     loading: Boolean,
     refresh: () -> Unit,
+    onClickItem: (TimelineItemUIModel) -> Unit,
 ) {
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = loading),
@@ -57,7 +59,10 @@ fun TimelineTemplate(
             modifier = Modifier.fillMaxSize()
         ) {
             items(uiModel.items) { item ->
-                TimelineItem(uiModel = item)
+                TimelineItem(
+                    uiModel = item,
+                    onClick = onClickItem,
+                )
             }
         }
     }
@@ -66,10 +71,12 @@ fun TimelineTemplate(
 @Composable
 fun TimelineItem(
     uiModel: TimelineItemUIModel,
+    onClick: (TimelineItemUIModel) -> Unit,
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick(uiModel) }
             .padding(8.dp)
             .shadow(3.dp, Shapes.small),
     ) {
@@ -162,6 +169,7 @@ fun TimelinePreview() {
         val uiModel = TimelineUIModel(
             items = List(3) {
                 TimelineItemUIModel(
+                    id = 0,
                     title = "会津若松の旅２泊３道の温泉旅、福島県でいい旅をしよう",
                     planImageUrl = "https://news.walkerplus.com/article/1041174/10377956_615.jpg",
                     bookmarks = 123,
@@ -176,9 +184,12 @@ fun TimelinePreview() {
         Scaffold(
             backgroundColor = White
         ) {
-            TimelineTemplate(uiModel = uiModel, loading = false) {
-
-            }
+            TimelineTemplate(
+                uiModel = uiModel,
+                loading = false,
+                refresh = {},
+                onClickItem = {},
+            )
         }
     }
 }

@@ -15,6 +15,7 @@ fun HomeTemplate(
     timelineUiModel: TimelineUIModel,
     loading: Boolean,
     refresh: () -> Unit,
+    onClickTimelineItem: (TimelineItemUIModel) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -25,6 +26,7 @@ fun HomeTemplate(
             uiModel = timelineUiModel,
             loading = loading,
             refresh = refresh,
+            onClickItem = onClickTimelineItem,
         )
     }
 }
@@ -35,6 +37,7 @@ fun HomePreview() {
     val uiModel = TimelineUIModel(
         items = List(3) {
             TimelineItemUIModel(
+                id = 0,
                 title = "会津若松の旅２泊３道の温泉旅、福島県でいい旅をしよう",
                 planImageUrl = "https://news.walkerplus.com/article/1041174/10377956_615.jpg",
                 bookmarks = 123,
@@ -51,7 +54,8 @@ fun HomePreview() {
             HomeTemplate(
                 timelineUiModel = uiModel,
                 loading = false,
-                refresh = {}
+                refresh = {},
+                onClickTimelineItem = {},
             )
         }
     }
