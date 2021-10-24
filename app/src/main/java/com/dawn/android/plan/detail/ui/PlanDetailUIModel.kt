@@ -13,6 +13,7 @@ data class PlanDetailUIModel(
     val days: List<PlanDayUIModel>,
     val createdAt: Instant,
     val places: List<String>,
+    val categories: List<String>,
     val seasons: List<String>,
     val timeSpans: List<String>,
     val cost: Int,
