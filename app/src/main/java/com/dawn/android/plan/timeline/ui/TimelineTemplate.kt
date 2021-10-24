@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -29,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.dawn.android.common.ui.CreatorProfileIcon
 import com.dawn.android.ui.theme.DawnTheme
 import com.dawn.android.ui.theme.Gray500
 import com.dawn.android.ui.theme.Gray900
@@ -103,14 +103,7 @@ fun TimelineItem(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Image(
-                        painter = rememberImagePainter(data = uiModel.creatorProfileImageUrl),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(20.dp)
-                            .clip(CircleShape),
-                    )
+                    CreatorProfileIcon(imageUrl = uiModel.creatorProfileImageUrl)
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = uiModel.creatorName,
