@@ -2,8 +2,10 @@ package com.dawn.android.common.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -11,18 +13,25 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
+import androidx.compose.material.icons.outlined.Bookmark
+import androidx.compose.material.icons.outlined.BookmarkBorder
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dawn.android.ui.theme.AccentBlue
 import com.dawn.android.ui.theme.DawnTheme
+import com.dawn.android.ui.theme.Gray200
+import com.dawn.android.ui.theme.Gray500
 import com.dawn.android.ui.theme.Gray700
 import com.dawn.android.ui.theme.Gray900
 import com.dawn.android.ui.theme.MainColor
 import com.dawn.android.ui.theme.Shapes
 import com.dawn.android.ui.theme.SubMainColor
+import com.dawn.android.ui.theme.Typography
 import com.dawn.android.ui.theme.White
 
 @Composable
@@ -122,6 +131,64 @@ fun BackNavigationButton(
     }
 }
 
+@Composable
+fun ShareButton(
+    onClick: () -> Unit,
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = Modifier
+            .size(44.dp)
+            .background(
+                color = Gray200,
+                shape = Shapes.small,
+            ),
+    ) {
+        Icon(
+            imageVector = Icons.Outlined.Share,
+            contentDescription = null,
+            tint = Gray900,
+        )
+    }
+}
+
+@Composable
+fun BookmarkButton(
+    bookmarkCount: Int,
+    bookmarked: Boolean,
+    onClick: () -> Unit,
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = if (bookmarked) AccentBlue else Gray200,
+            contentColor = if (bookmarked) White else Gray900,
+        ),
+        shape = Shapes.small,
+        contentPadding = PaddingValues(0.dp),
+        modifier = Modifier.size(
+            width = 94.dp,
+            height = 44.dp,
+        ),
+    ) {
+        Column {
+            Icon(
+                imageVector = if (bookmarked) {
+                    Icons.Outlined.Bookmark
+                } else {
+                    Icons.Outlined.BookmarkBorder
+                },
+                contentDescription = null,
+                tint = if (bookmarked) White else Gray500,
+            )
+            Text(
+                text = bookmarkCount.toString(),
+                style = Typography.body2,
+            )
+        }
+    }
+}
+
 @Preview
 @Composable
 fun ButtonPreview() {
@@ -135,6 +202,9 @@ fun ButtonPreview() {
             SubMainTextButton(text = "ボタン", onClick = { /*TODO*/ })
             GrayTextButton(text = "ボタン", onClick = { /*TODO*/ })
             BackNavigationButton {}
+            ShareButton {}
+            BookmarkButton(bookmarkCount = 123, bookmarked = true) {}
+            BookmarkButton(bookmarkCount = 123, bookmarked = false) {}
         }
     }
 }
