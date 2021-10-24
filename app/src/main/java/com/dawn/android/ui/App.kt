@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dawn.android.plan.detail.ui.PlanDetailPage
 import com.dawn.android.plan.ui.HomePage
+import com.dawn.android.plan.ui.PlanNavItems
 import com.dawn.android.ui.theme.White
 
 @Composable
@@ -43,6 +45,10 @@ fun AppContent() {
             ) {
                 composable(route = BottomNavItems.Home.route) {
                     HomePage()
+                }
+                composable(route = PlanNavItems.PlanDetail.route + "/{${PlanNavItems.PlanDetail.planIdArg}}") { backStackEntry ->
+                    val id = requireNotNull(backStackEntry.arguments?.getString(PlanNavItems.PlanDetail.planIdArg)).toLong()
+                    PlanDetailPage(planId = id)
                 }
             }
         }

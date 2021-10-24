@@ -1,7 +1,8 @@
-package com.dawn.android.plan.ui
+package com.dawn.android.plan.timeline.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -29,6 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.dawn.android.common.ui.CreatorProfileIcon
 import com.dawn.android.ui.theme.DawnTheme
 import com.dawn.android.ui.theme.Gray500
 import com.dawn.android.ui.theme.Gray900
@@ -48,6 +49,7 @@ fun TimelineTemplate(
     uiModel: TimelineUIModel,
     loading: Boolean,
     refresh: () -> Unit,
+    onClickItem: (TimelineItemUIModel) -> Unit,
 ) {
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = loading),
@@ -57,7 +59,10 @@ fun TimelineTemplate(
             modifier = Modifier.fillMaxSize()
         ) {
             items(uiModel.items) { item ->
-                TimelineItem(uiModel = item)
+                TimelineItem(
+                    uiModel = item,
+                    onClick = onClickItem,
+                )
             }
         }
     }
@@ -66,10 +71,12 @@ fun TimelineTemplate(
 @Composable
 fun TimelineItem(
     uiModel: TimelineItemUIModel,
+    onClick: (TimelineItemUIModel) -> Unit,
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick(uiModel) }
             .padding(8.dp)
             .shadow(3.dp, Shapes.small),
     ) {
@@ -103,14 +110,7 @@ fun TimelineItem(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Image(
-                        painter = rememberImagePainter(data = uiModel.creatorProfileImageUrl),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(20.dp)
-                            .clip(CircleShape),
-                    )
+                    CreatorProfileIcon(imageUrl = uiModel.creatorProfileImageUrl)
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = uiModel.creatorName,
@@ -169,6 +169,7 @@ fun TimelinePreview() {
         val uiModel = TimelineUIModel(
             items = List(3) {
                 TimelineItemUIModel(
+                    id = 0,
                     title = "会津若松の旅２泊３道の温泉旅、福島県でいい旅をしよう",
                     planImageUrl = "https://news.walkerplus.com/article/1041174/10377956_615.jpg",
                     bookmarks = 123,
@@ -183,9 +184,12 @@ fun TimelinePreview() {
         Scaffold(
             backgroundColor = White
         ) {
-            TimelineTemplate(uiModel = uiModel, loading = false) {
-
-            }
+            TimelineTemplate(
+                uiModel = uiModel,
+                loading = false,
+                refresh = {},
+                onClickItem = {},
+            )
         }
     }
 }
