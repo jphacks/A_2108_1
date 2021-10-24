@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,7 +30,6 @@ import com.dawn.android.common.ui.BackNavigationButton
 import com.dawn.android.common.ui.BookmarkButton
 import com.dawn.android.common.ui.CreatorProfileIcon
 import com.dawn.android.common.ui.ShareButton
-import com.dawn.android.common.ui.TopBar
 import com.dawn.android.common.ui.colonFormat
 import com.dawn.android.common.ui.dotFormat
 import com.dawn.android.ui.theme.AccentBlue
@@ -54,16 +52,13 @@ fun PlanDetailTemplate(
     onClickShare: () -> Unit,
     onClickBookmark: () -> Unit,
 ) {
-    Scaffold(
-        topBar = {
-            TopBar(
-                navigationIcon = {
-                    BackNavigationButton(onClick = onClickBack)
-                }
-            )
-        },
+    Box(
+        modifier = Modifier.fillMaxSize(),
     ) {
         LazyColumn {
+            item {
+                Spacer(modifier = Modifier.height(80.dp))
+            }
             item {
                 Image(
                     painter = rememberImagePainter(
@@ -281,6 +276,14 @@ fun PlanDetailTemplate(
                         ),
                 )
             }
+        }
+        Box(
+            modifier = Modifier.padding(
+                start = 16.dp,
+                top = 8.dp,
+            )
+        ) {
+            BackNavigationButton(onClick = onClickBack)
         }
     }
 }
