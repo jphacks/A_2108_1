@@ -3,6 +3,7 @@ package com.dawn.android.plan.timeline.ui
 import java.time.Instant
 
 data class TimelineItemUIModel(
+    val id: Long,
     val title: String,
     val planImageUrl: String,
     val bookmarks: Int,
