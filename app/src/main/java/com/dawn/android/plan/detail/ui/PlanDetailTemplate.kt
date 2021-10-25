@@ -158,7 +158,6 @@ fun PlanDetailTemplate(
                     Spacer(modifier = Modifier.weight(1f))
                 }
             }
-            var number = 0
             items(uiModel.schedule) { schedule ->
                 Column(
                     modifier = Modifier
@@ -182,10 +181,8 @@ fun PlanDetailTemplate(
                             PlanHeading(heading = schedule)
                         }
                         is PlanScheduleUIModel.Section -> {
-                            number++
                             PlanScheduleSection(
                                 section = schedule,
-                                number = number,
                                 type = PlanScheduleViewType.Time,
                             )
                         }
@@ -239,10 +236,8 @@ fun PlanDetailTemplate(
                             PlanHeading(heading = schedule)
                         }
                         is PlanScheduleUIModel.Section -> {
-                            number++
                             PlanScheduleDetailSection(
                                 section = schedule,
-                                number = number,
                                 type = PlanScheduleViewType.Time,
                             )
                         }
@@ -427,7 +422,6 @@ enum class PlanScheduleViewType {
 @Composable
 fun PlanScheduleSection(
     section: PlanScheduleUIModel.Section,
-    number: Int,
     type: PlanScheduleViewType,
 ) {
     Column(
@@ -436,7 +430,7 @@ fun PlanScheduleSection(
             .padding(horizontal = 8.dp),
     ) {
         Row {
-            PlanScheduleSectionNumber(number = number)
+            PlanScheduleSectionNumber(number = section.number)
             Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = section.title,
@@ -510,7 +504,6 @@ fun PlanScheduleSection(
 @Composable
 fun PlanScheduleDetailSection(
     section: PlanScheduleUIModel.Section,
-    number: Int,
     type: PlanScheduleViewType,
 ) {
     Column(
@@ -521,7 +514,7 @@ fun PlanScheduleDetailSection(
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            PlanScheduleSectionNumber(number = number)
+            PlanScheduleSectionNumber(number = section.number)
             Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = section.title,
@@ -638,6 +631,7 @@ fun PlanDetailPreview() {
             )
         ) + List(4) {
             PlanScheduleUIModel.Section(
+                number = it + 1,
                 title = "自宅から会津まで車で移動",
                 description = "地元の人だと会津若松駅からのスタートだと思います。\n" +
                     "会津若松駅は下のリンクから。\n" +
@@ -650,6 +644,7 @@ fun PlanDetailPreview() {
             text = "会津に向かう",
         ) + List(3) {
             PlanScheduleUIModel.Section(
+                number = it + 5,
                 title = "自宅から会津まで車で移動",
                 description = "地元の人だと会津若松駅からのスタートだと思います。\n" +
                     "会津若松駅は下のリンクから。\n" +
@@ -665,6 +660,7 @@ fun PlanDetailPreview() {
             )
         ) +  List(3) {
             PlanScheduleUIModel.Section(
+                number = it + 8,
                 title = "自宅から会津まで車で移動",
                 description = "地元の人だと会津若松駅からのスタートだと思います。\n" +
                     "会津若松駅は下のリンクから。\n" +
