@@ -32,6 +32,7 @@ fun PlanDetailPage(
             )
         ) + List(4) {
             PlanScheduleUIModel.Section(
+                number = it + 1,
                 title = "自宅から会津まで車で移動",
                 description = "地元の人だと会津若松駅からのスタートだと思います。\n" +
                     "会津若松駅は下のリンクから。\n" +
@@ -44,6 +45,7 @@ fun PlanDetailPage(
             text = "会津に向かう",
         ) + List(3) {
             PlanScheduleUIModel.Section(
+                number = it + 5,
                 title = "自宅から会津まで車で移動",
                 description = "地元の人だと会津若松駅からのスタートだと思います。\n" +
                     "会津若松駅は下のリンクから。\n" +
@@ -59,6 +61,7 @@ fun PlanDetailPage(
             )
         ) +  List(3) {
             PlanScheduleUIModel.Section(
+                number = it + 8,
                 title = "自宅から会津まで車で移動",
                 description = "地元の人だと会津若松駅からのスタートだと思います。\n" +
                     "会津若松駅は下のリンクから。\n" +

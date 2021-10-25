@@ -12,6 +12,7 @@ sealed interface PlanScheduleUIModel {
     ) : PlanScheduleUIModel
 
     data class Section(
+        val number: Int,
         val title: String,
         val description: String,
         val startTime: LocalTime,
