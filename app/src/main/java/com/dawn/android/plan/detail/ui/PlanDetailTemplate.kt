@@ -21,6 +21,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -171,13 +172,14 @@ fun PlanDetailTemplate(
                                 contentAlignment = Alignment.Center,
                                 modifier = Modifier.fillMaxWidth(),
                             ) {
-                                PlanDayHeader(day = schedule.day)
+                                PlanDayHeader(
+                                    day = schedule.day,
+                                    color = White,
+                                )
                             }
-                            number = 0
                         }
                         is PlanScheduleUIModel.Heading -> {
                             PlanHeading(heading = schedule)
-                            number = 0
                         }
                         is PlanScheduleUIModel.Section -> {
                             number++
@@ -204,6 +206,51 @@ fun PlanDetailTemplate(
                             )
                         ),
                 )
+            }
+            item {
+                Spacer(modifier = Modifier.height(56.dp))
+            }
+            item {
+                Text(
+                    text = "スケジュール",
+                    style = Typography.h4,
+                    color = Gray900,
+                    modifier = Modifier.padding(16.dp),
+                )
+            }
+            items(uiModel.schedule) { schedule ->
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    when (schedule) {
+                        is PlanScheduleUIModel.Day -> {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.fillMaxWidth(),
+                            ) {
+                                PlanDayHeader(
+                                    day = schedule.day,
+                                    color = Gray200,
+                                )
+                            }
+                        }
+                        is PlanScheduleUIModel.Heading -> {
+                            PlanHeading(heading = schedule)
+                        }
+                        is PlanScheduleUIModel.Section -> {
+                            number++
+                            PlanScheduleDetailSection(
+                                section = schedule,
+                                number = number,
+                                type = PlanScheduleViewType.Time,
+                            )
+                        }
+                    }
+                }
+            }
+            item {
+                Spacer(modifier = Modifier.height(32.dp))
             }
         }
     }
@@ -321,13 +368,14 @@ fun PlanAbstractInfoRow(
 @Composable
 fun PlanDayHeader(
     day: Int,
+    color: Color,
 ) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .size(64.dp)
             .background(
-                color = White,
+                color = color,
                 shape = CircleShape,
             ),
     ) {
@@ -393,6 +441,7 @@ fun PlanScheduleSection(
             Text(
                 text = section.title,
                 style = Typography.body1,
+                color = Gray900,
             )
         }
         when (type) {
@@ -455,6 +504,98 @@ fun PlanScheduleSection(
                 Text(text = "地図は未対応")
             }
         }
+    }
+}
+
+@Composable
+fun PlanScheduleDetailSection(
+    section: PlanScheduleUIModel.Section,
+    number: Int,
+    type: PlanScheduleViewType,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp),
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            PlanScheduleSectionNumber(number = number)
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = section.title,
+                style = Typography.h5,
+                color = Gray900,
+            )
+        }
+        Spacer(modifier = Modifier.height(4.dp))
+        when (type) {
+            PlanScheduleViewType.StartEnd -> {
+                val text = "${section.startTime.colonFormat()} ~ ${section.endTime.colonFormat()}"
+                Text(
+                    text = text,
+                    style = Typography.body2,
+                    color = AccentBlue,
+                    modifier = Modifier
+                        .padding(start = 32.dp),
+                )
+            }
+            PlanScheduleViewType.Time -> {
+                val duration = Duration.between(section.startTime, section.endTime)
+                val hours = duration.toHours()
+                val minutes = duration.toMinutes() % 60
+                val text = when {
+                    hours == 0L && minutes == 0L -> "0分"
+                    hours == 0L -> "${minutes}分"
+                    minutes == 0L -> "${hours}時間"
+                    else -> "${hours}時間${minutes}分"
+                }
+                Text(
+                    text = text,
+                    style = Typography.body2,
+                    color = AccentBlue,
+                    modifier = Modifier
+                        .padding(start = 44.dp),
+                )
+            }
+            PlanScheduleViewType.StartEndTime -> {
+                Row(
+                    modifier = Modifier.padding(start = 32.dp)
+                ) {
+                    val startEndTime = "${section.startTime.colonFormat()} ~ ${section.endTime.colonFormat()}"
+                    Text(
+                        text = startEndTime,
+                        style = Typography.body2,
+                        color = AccentBlue,
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    val duration = Duration.between(section.startTime, section.endTime)
+                    val hours = duration.toHours()
+                    val minutes = duration.toMinutes() % 60
+                    val durationText = when {
+                        hours == 0L && minutes == 0L -> "0分"
+                        hours == 0L -> "${minutes}分"
+                        minutes == 0L -> "${hours}時間"
+                        else -> "${hours}時間${minutes}分"
+                    }
+                    Text(
+                        text = durationText,
+                        style = Typography.body2,
+                        color = AccentBlue,
+                    )
+                }
+            }
+            PlanScheduleViewType.Map -> {
+                Text(text = "地図は未対応")
+            }
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = section.description,
+            style = Typography.subtitle2,
+            color = Gray900,
+        )
     }
 }
 
