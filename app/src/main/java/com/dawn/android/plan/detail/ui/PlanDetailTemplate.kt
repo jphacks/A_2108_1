@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -135,77 +136,7 @@ fun PlanDetailTemplate(
                 Spacer(modifier = Modifier.height(32.dp))
             }
             item {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(
-                            color = MainColor,
-                        ),
-                ) {
-                    Spacer(modifier = Modifier.height(56.dp))
-                    Text(
-                        text = "概要",
-                        style = Typography.h4,
-                        color = Gray900,
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                        )
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .background(
-                                color = White,
-                                shape = Shapes.medium,
-                            )
-                            .padding(
-                                vertical = 16.dp,
-                                horizontal = 8.dp,
-                            ),
-                    ) {
-                        PlanAbstractInfoRow(
-                            title = "場所",
-                            value = uiModel.places.joinToString("、"),
-                        )
-                        PlanAbstractInfoRow(
-                            title = "カテゴリ",
-                            value = uiModel.categories.joinToString("、"),
-                        )
-                        PlanAbstractInfoRow(
-                            title = "時期",
-                            value = uiModel.seasons.joinToString("、"),
-                        )
-                        PlanAbstractInfoRow(
-                            title = "期間",
-                            value = uiModel.timeSpans.joinToString("、"),
-                        )
-                        PlanAbstractInfoRow(
-                            title = "料金",
-                            value = "%,d円".format(uiModel.cost),
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = uiModel.description,
-                            style = Typography.body1,
-                            color = Gray900,
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(56.dp))
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp)
-                            .background(
-                                color = Gray200,
-                                shape = RoundedCornerShape(
-                                    topStart = 64.dp,
-                                    topEnd = 64.dp,
-                                )
-                            ),
-                    )
-                }
+                PlanAbstractSection(uiModel = uiModel)
             }
             item {
                 Row(
@@ -275,6 +206,83 @@ fun PlanDetailTemplate(
                 )
             }
         }
+    }
+}
+
+@Composable
+fun PlanAbstractSection(
+    uiModel: PlanDetailUIModel,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                color = MainColor,
+            ),
+    ) {
+        Spacer(modifier = Modifier.height(56.dp))
+        Text(
+            text = "概要",
+            style = Typography.h4,
+            color = Gray900,
+            modifier = Modifier.padding(
+                start = 16.dp,
+            )
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .background(
+                    color = White,
+                    shape = Shapes.medium,
+                )
+                .padding(
+                    vertical = 16.dp,
+                    horizontal = 8.dp,
+                ),
+        ) {
+            PlanAbstractInfoRow(
+                title = "場所",
+                value = uiModel.places.joinToString("、"),
+            )
+            PlanAbstractInfoRow(
+                title = "カテゴリ",
+                value = uiModel.categories.joinToString("、"),
+            )
+            PlanAbstractInfoRow(
+                title = "時期",
+                value = uiModel.seasons.joinToString("、"),
+            )
+            PlanAbstractInfoRow(
+                title = "期間",
+                value = uiModel.timeSpans.joinToString("、"),
+            )
+            PlanAbstractInfoRow(
+                title = "料金",
+                value = "%,d円".format(uiModel.cost),
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = uiModel.description,
+                style = Typography.body1,
+                color = Gray900,
+            )
+        }
+        Spacer(modifier = Modifier.height(56.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .background(
+                    color = Gray200,
+                    shape = RoundedCornerShape(
+                        topStart = 64.dp,
+                        topEnd = 64.dp,
+                    )
+                ),
+        )
     }
 }
 
@@ -533,10 +541,14 @@ fun PlanDetailPreview() {
         cost = 10000,
     )
     DawnTheme {
-        PlanDetailTemplate(
-            uiModel = uiModel,
-            onClickShare = {},
-            onClickBookmark = {},
-        )
+        Scaffold(
+            backgroundColor = White,
+        ) {
+            PlanDetailTemplate(
+                uiModel = uiModel,
+                onClickShare = {},
+                onClickBookmark = {},
+            )
+        }
     }
 }
