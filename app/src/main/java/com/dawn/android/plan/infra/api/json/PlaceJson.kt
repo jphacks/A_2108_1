@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PlaceJson(
     val id: Long,
-    val area: String,
-    val prefecture: String?,
-    val city: String?,
+    val area: Int,
+    val prefecture: Int,
+    val city: Int,
 )
