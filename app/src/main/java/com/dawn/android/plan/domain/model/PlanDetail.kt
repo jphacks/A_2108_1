@@ -8,6 +8,6 @@ data class PlanDetail(
     val description: String,
     val imageUrl: String,
     val creator: Creator,
-    val days: List<PlanSchedule>,
+    val days: List<Day>,
     val condition: Condition,
 )
