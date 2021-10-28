@@ -1,8 +1,8 @@
-package com.dawn.android.user.infra.impl.domain.service
+package com.dawn.android.auth.infra.impl.domain.service
 
-import com.dawn.android.user.domain.model.Token
-import com.dawn.android.user.domain.service.TokenProvider
-import com.dawn.android.user.infra.preferences.TokenPreferences
+import com.dawn.android.auth.domain.model.Token
+import com.dawn.android.auth.domain.service.TokenProvider
+import com.dawn.android.auth.infra.preferences.TokenPreferences
 
 class TokenProviderImpl(
     private val preferences: TokenPreferences,

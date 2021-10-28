@@ -1,4 +1,4 @@
-package com.dawn.android.user.infra.api.json
+package com.dawn.android.auth.infra.api.json
 
 import kotlinx.serialization.Serializable
 

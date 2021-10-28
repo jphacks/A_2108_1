@@ -1,11 +1,11 @@
-package com.dawn.android.user.infra.api
+package com.dawn.android.auth.infra.api
 
-import com.dawn.android.user.infra.api.json.TokenJson
-import com.dawn.android.user.infra.api.json.UserRegistrationJson
+import com.dawn.android.auth.infra.api.json.TokenJson
+import com.dawn.android.auth.infra.api.json.UserRegistrationJson
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 
-class UserApi(
+class AuthApi(
     private val httpClient: HttpClient,
 ) {
     suspend fun register(userRegistration: UserRegistrationJson): TokenJson {

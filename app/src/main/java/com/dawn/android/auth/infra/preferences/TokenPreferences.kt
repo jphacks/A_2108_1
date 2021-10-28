@@ -1,4 +1,4 @@
-package com.dawn.android.user.infra.preferences
+package com.dawn.android.auth.infra.preferences
 
 import android.content.Context
 import androidx.core.content.edit

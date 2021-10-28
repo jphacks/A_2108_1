@@ -1,6 +1,6 @@
-package com.dawn.android.user.domain.service
+package com.dawn.android.auth.domain.service
 
-import com.dawn.android.user.domain.model.Token
+import com.dawn.android.auth.domain.model.Token
 
 interface TokenProvider {
     suspend fun provide(): Token?

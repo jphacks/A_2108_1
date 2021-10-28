@@ -1,5 +1,8 @@
-package com.dawn.android.user.domain.model
+package com.dawn.android.auth.domain.model
 
+import com.dawn.android.user.domain.model.Contact
+import com.dawn.android.user.domain.model.Place
+import com.dawn.android.user.domain.model.Sex
 import java.time.LocalDate
 
 data class UserRegistration(
