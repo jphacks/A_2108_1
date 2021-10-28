@@ -3,7 +3,6 @@ package com.dawn.android.user.domain.model
 import java.time.LocalDate
 
 data class UserRegistration(
-    val id: UserId,
     val userName: String,
     val email: String,
     val password: String,

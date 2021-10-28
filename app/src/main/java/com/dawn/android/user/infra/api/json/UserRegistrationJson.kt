@@ -1,14 +1,17 @@
 package com.dawn.android.user.infra.api.json
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class UserRegistrationJson(
-    val id: Long,
+    val id: Long = 0,
     val userName: String,
     val email: String,
     val password: String,
-    val imageUrl: String,
+    val image: String,
     val displayName: String,
     val dateOfBirth: String,
     val sex: Int,
-    val contact: ContactJson,
-    val place: PlaceJson,
+    val contacts: ContactJson,
+    val address: PlaceJson,
 )
