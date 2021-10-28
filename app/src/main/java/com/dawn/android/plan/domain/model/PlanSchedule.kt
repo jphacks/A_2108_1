@@ -12,7 +12,7 @@ sealed interface PlanSchedule {
         val description: String,
         val startTime: LocalTime,
         val endTime: LocalTime,
-        val place: Place?,
+        val address: Address?,
         val hpLink: String?,
         val reservationLink: String?,
     ) : PlanSchedule

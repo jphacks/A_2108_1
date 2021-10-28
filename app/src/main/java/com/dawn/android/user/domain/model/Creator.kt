@@ -4,4 +4,5 @@ data class Creator(
     val id: CreatorId,
     val imageUrl: String,
     val displayName: String,
+    val job: Job,
 )

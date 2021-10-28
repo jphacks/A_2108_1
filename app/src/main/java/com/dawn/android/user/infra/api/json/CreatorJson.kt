@@ -5,7 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CreatorJson(
     val id: Long,
-    val image: String,
-    val displayName: String,
+    val realName: String,
     val job: JobJson,
 )

@@ -1,5 +1,6 @@
 package com.dawn.android.plan.infra.converter
 
+import com.dawn.android.plan.domain.model.Address
 import com.dawn.android.plan.domain.model.Category
 import com.dawn.android.plan.domain.model.CategoryId
 import com.dawn.android.plan.domain.model.Condition
@@ -15,6 +16,7 @@ import com.dawn.android.plan.domain.model.Season
 import com.dawn.android.plan.domain.model.SeasonId
 import com.dawn.android.plan.domain.model.TimeSpan
 import com.dawn.android.plan.domain.model.TimeSpanId
+import com.dawn.android.plan.infra.api.json.AddressJson
 import com.dawn.android.plan.infra.api.json.CategoryJson
 import com.dawn.android.plan.infra.api.json.ConditionJson
 import com.dawn.android.plan.infra.api.json.DayJson
@@ -25,9 +27,10 @@ import com.dawn.android.plan.infra.api.json.PlanScheduleJson
 import com.dawn.android.plan.infra.api.json.SeasonJson
 import com.dawn.android.plan.infra.api.json.TimeSpanJson
 import com.dawn.android.user.infra.converter.UserJsonConverter
+import java.time.Instant
 import java.time.LocalTime
 
-object PlanConverter {
+object PlanJsonConverter {
     fun convertToDomainModel(json: SeasonJson): Season {
         return Season(
             id = SeasonId(json.id),
@@ -67,28 +70,35 @@ object PlanConverter {
         )
     }
 
+    fun convertToDomainModel(json: AddressJson): Address {
+        return Address(
+            plusCode = json.plusCode,
+        )
+    }
+
     fun convertToDomainModel(json: DayJson): Day {
         val schedules = (json.headings + json.schedule)
             .sortedBy { it.order }
-            .map {
-                when (it) {
+            .map { scheduleJson ->
+                when (scheduleJson) {
                     is PlanScheduleJson.Heading -> {
-                        PlanSchedule.Heading(it.text)
+                        PlanSchedule.Heading(scheduleJson.text)
                     }
                     is PlanScheduleJson.Section -> {
                         PlanSchedule.Section(
-                            title = it.title,
-                            description = it.description,
-                            startTime = LocalTime.of(it.startTime / 60, it.startTime % 60),
-                            endTime = LocalTime.of(it.endTime / 60, it.endTime % 60),
-                            place = convertToDomainModel(it.place),
-                            hpLink = it.hpLink,
-                            reservationLink = it.reservationLink,
+                            title = scheduleJson.title,
+                            description = scheduleJson.description,
+                            startTime = LocalTime.of(scheduleJson.startTime / 60, scheduleJson.startTime % 60),
+                            endTime = LocalTime.of(scheduleJson.endTime / 60, scheduleJson.endTime % 60),
+                            address = scheduleJson.address?.let { convertToDomainModel(it) },
+                            hpLink = scheduleJson.hpLink,
+                            reservationLink = scheduleJson.reservationLink,
                         )
                     }
                 }
             }
         return Day(
+            day = json.nthDay,
             schedules = schedules,
         )
     }
@@ -99,9 +109,10 @@ object PlanConverter {
             title = json.title,
             description = json.description,
             imageUrl = json.imageUrl,
-            creator = UserJsonConverter.convertToDomainModel(json.creator),
+            creator = UserJsonConverter.convertToDomainModel(json.creatorUser),
             days = json.days.map { convertToDomainModel(it) },
             condition = convertToDomainModel(json.conditions),
+            createdAt = Instant.parse(json.createdAt),
         )
     }
 
@@ -110,7 +121,9 @@ object PlanConverter {
             id = PlanId(json.planId),
             title = json.title,
             description = json.description,
+            imageUrl = json.imageUrl,
             creator = UserJsonConverter.convertToDomainModel(json.creator),
+            createdAt = Instant.parse(json.createdAt),
         )
     }
 }
