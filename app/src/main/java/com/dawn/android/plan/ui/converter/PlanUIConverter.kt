@@ -59,7 +59,7 @@ object PlanUIConverter {
             categories = model.condition.categories.map { it.text },
             seasons = model.condition.seasons.map { it.text },
             timeSpans = model.condition.timeSpans.map { it.text },
-            cost = 1000, // todo
+            cost = model.condition.estimatedCost,
         )
     }
 
