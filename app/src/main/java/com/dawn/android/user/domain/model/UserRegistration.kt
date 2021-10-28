@@ -2,7 +2,7 @@ package com.dawn.android.user.domain.model
 
 import java.time.LocalDate
 
-data class Me(
+data class UserRegistration(
     val id: UserId,
     val userName: String,
     val email: String,
@@ -11,4 +11,6 @@ data class Me(
     val displayName: String,
     val dateOfBirth: LocalDate,
     val sex: Sex,
+    val contact: Contact,
+    val place: Place,
 )
