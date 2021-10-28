@@ -17,6 +17,7 @@ import androidx.compose.material.icons.outlined.Bookmark
 import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -172,7 +173,9 @@ fun BookmarkButton(
         ),
         elevation = ButtonDefaults.elevation(0.dp)
     ) {
-        Column {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
             Icon(
                 imageVector = if (bookmarked) {
                     Icons.Outlined.Bookmark
@@ -204,8 +207,8 @@ fun ButtonPreview() {
             GrayTextButton(text = "ボタン", onClick = { /*TODO*/ })
             BackNavigationButton {}
             ShareButton {}
-            BookmarkButton(bookmarkCount = 123, bookmarked = true) {}
-            BookmarkButton(bookmarkCount = 123, bookmarked = false) {}
+            BookmarkButton(bookmarkCount = 0, bookmarked = true) {}
+            BookmarkButton(bookmarkCount = 0, bookmarked = false) {}
         }
     }
 }
