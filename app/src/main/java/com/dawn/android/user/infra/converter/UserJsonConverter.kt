@@ -7,7 +7,7 @@ import com.dawn.android.user.domain.model.Job
 import com.dawn.android.user.domain.model.JobId
 import com.dawn.android.user.infra.api.json.ContactJson
 import com.dawn.android.user.infra.api.json.JobJson
-import com.dawn.android.user.infra.api.json.MaskedUserJson
+import com.dawn.android.user.infra.api.json.CreatorUserJson
 import java.time.Instant
 
 object UserJsonConverter {
@@ -19,7 +19,7 @@ object UserJsonConverter {
         )
     }
 
-    fun convertToDomainModel(json: MaskedUserJson): Creator {
+    fun convertToDomainModel(json: CreatorUserJson): Creator {
         return Creator(
             id = CreatorId(json.creator.id),
             imageUrl = json.imageUrl,

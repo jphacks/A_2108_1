@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MaskedUserJson(
+data class CreatorUserJson(
     val id: Long,
     val userName: String,
     @SerialName("image")
