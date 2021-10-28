@@ -3,6 +3,7 @@ package com.dawn.android
 import android.app.Application
 import com.dawn.android.common.commonModule
 import com.dawn.android.plan.di.planModule
+import com.dawn.android.user.di.userModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -13,9 +14,12 @@ class DawnApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@DawnApplication)
-            modules(
-                commonModule + planModule,
-            )
+            val modules = listOf(
+                commonModule,
+                planModule,
+                userModule,
+            ).flatten()
+            modules(modules)
         }
     }
 }
