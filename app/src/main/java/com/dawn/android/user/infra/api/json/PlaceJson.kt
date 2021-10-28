@@ -1,4 +1,4 @@
-package com.dawn.android.plan.infra.api.json
+package com.dawn.android.user.infra.api.json
 
 import kotlinx.serialization.Serializable
 
@@ -8,5 +8,5 @@ data class PlaceJson(
     val area: Int,
     val prefecture: Int,
     val city: Int,
-    val text: String,
+    val name: String,
 )
