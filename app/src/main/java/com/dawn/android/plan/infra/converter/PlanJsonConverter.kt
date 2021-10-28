@@ -58,6 +58,8 @@ object PlanJsonConverter {
             seasons = json.season.map { convertToDomainModel(it) },
             timeSpans = json.timeSpan.map { convertToDomainModel(it) },
             categories = json.category.map { convertToDomainModel(it) },
+            places = json.place.map { UserJsonConverter.convertToDomainModel(it) },
+            estimatedCost = json.estimatedCost,
         )
     }
 
