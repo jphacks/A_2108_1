@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.dawn.android.common.ui.BackNavigationButton
@@ -15,7 +16,7 @@ fun PlanDetailPage(
     viewModel: PlanDetailViewModel,
 ) {
     val navController = LocalNav.current
-    val uiModel = viewModel.planDetail.value
+    val uiModel = viewModel.planDetail.collectAsState().value
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {

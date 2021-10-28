@@ -1,34 +1,28 @@
 package com.dawn.android.plan.ui
 
 import androidx.compose.runtime.Composable
-import com.dawn.android.plan.timeline.ui.TimelineItemUIModel
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import com.dawn.android.plan.timeline.ui.TimelineUIModel
 import com.dawn.android.ui.LocalNav
-import java.time.Instant
 
 @Composable
-fun HomePage() {
+fun HomePage(
+    viewModel: HomeViewModel,
+) {
+    LaunchedEffect(Unit) {
+        viewModel.refresh()
+    }
     val navController = LocalNav.current
-    // TODO: get from api
+    val items = viewModel.timelineItems.collectAsState().value
     val uiModel = TimelineUIModel(
-        items = List(3) {
-            TimelineItemUIModel(
-                id = 0,
-                title = "会津若松の旅２泊３道の温泉旅、福島県でいい旅をしよう",
-                planImageUrl = "https://news.walkerplus.com/article/1041174/10377956_615.jpg",
-                bookmarks = 123,
-                creatorName = "ほげたほげお",
-                creatorProfileImageUrl = "https://yt8492.com/icon/yt8492-200.jpg",
-                creatorJob = "旅館スタッフ",
-                creatorJobExperienceYears = 12,
-                createdAt = Instant.now(),
-            )
-        }
+        items = items,
     )
+    val loading = viewModel.loading.collectAsState().value
     HomeTemplate(
         timelineUiModel = uiModel,
-        loading = false,
-        refresh = {},
+        loading = loading,
+        refresh = viewModel::refresh,
         onClickTimelineItem = {
             navController.navigate(
                 route = PlanNavItems.PlanDetail.route + "/${it.id}"

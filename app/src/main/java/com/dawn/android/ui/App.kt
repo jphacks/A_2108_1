@@ -12,7 +12,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dawn.android.plan.detail.ui.PlanDetailPage
 import com.dawn.android.plan.detail.ui.PlanDetailViewModel
+import com.dawn.android.plan.domain.model.PlanId
 import com.dawn.android.plan.ui.HomePage
+import com.dawn.android.plan.ui.HomeViewModel
 import com.dawn.android.plan.ui.PlanNavItems
 import com.dawn.android.ui.theme.White
 import org.koin.androidx.compose.getViewModel
@@ -47,10 +49,12 @@ fun AppContent() {
                 startDestination = BottomNavItems.Home.route,
             ) {
                 composable(route = BottomNavItems.Home.route) {
-                    HomePage()
+                    val viewModel = getViewModel<HomeViewModel>()
+                    HomePage(viewModel)
                 }
                 composable(route = PlanNavItems.PlanDetail.route + "/{${PlanNavItems.PlanDetail.planIdArg}}") { backStackEntry ->
-                    val id = requireNotNull(backStackEntry.arguments?.getString(PlanNavItems.PlanDetail.planIdArg)).toLong()
+                    val rawId = requireNotNull(backStackEntry.arguments?.getString(PlanNavItems.PlanDetail.planIdArg)).toLong()
+                    val id = PlanId(rawId)
                     val viewModel = getViewModel<PlanDetailViewModel> {
                         parametersOf(id)
                     }
