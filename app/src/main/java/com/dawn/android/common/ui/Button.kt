@@ -1,14 +1,22 @@
 package com.dawn.android.common.ui
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
@@ -39,7 +47,8 @@ import com.dawn.android.ui.theme.White
 fun MainTextButton(
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
 ) {
     TextButton(
         onClick = onClick,
@@ -47,15 +56,45 @@ fun MainTextButton(
         colors = ButtonDefaults.buttonColors(
             backgroundColor = MainColor,
             contentColor = Gray900,
-            disabledBackgroundColor = SubMainColor,
-            disabledContentColor = Gray700,
+            disabledBackgroundColor = Gray500,
+            disabledContentColor = Gray900,
         ),
         shape = Shapes.medium,
+        enabled = enabled,
     ) {
         Text(
             text = text,
             fontSize = 15.sp,
             fontWeight = FontWeight.Bold,
+        )
+    }
+}
+
+@Composable
+fun MainOutlinedTextButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    OutlinedButton(
+        onClick = onClick,
+        modifier = modifier,
+        elevation = ButtonDefaults.elevation(14.dp),
+        shape = Shapes.medium,
+        colors = ButtonDefaults.outlinedButtonColors(
+            backgroundColor = White,
+            contentColor = Gray900,
+        ),
+        border = BorderStroke(
+            width = 2.dp,
+            color = MainColor,
+        ),
+    ) {
+        Text(
+            text = text,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(vertical = 4.dp),
         )
     }
 }
@@ -193,6 +232,71 @@ fun BookmarkButton(
     }
 }
 
+@Composable
+fun SelectableButton(
+    text: String,
+    selected: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .selectable(
+                selected = selected,
+                onClick = onClick,
+            )
+            .background(
+                color = if (selected) {
+                    MainColor
+                } else {
+                    Gray200
+                },
+                shape = Shapes.medium,
+            ),
+    ) {
+        Text(
+            text = text,
+            style = Typography.h6,
+            color = Gray900,
+        )
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun <T> SelectableSection(
+    items: List<T>,
+    selectedItem: T?,
+    modifier: Modifier = Modifier,
+    getText: (T) -> String,
+    onSelect: (T) -> Unit
+) {
+    LazyVerticalGrid(
+        cells = GridCells.Adaptive(minSize = 92.dp),
+        modifier = modifier,
+    ) {
+        items(items) { item ->
+            Box(
+                modifier = Modifier
+                    .padding(12.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                SelectableButton(
+                    text = getText(item),
+                    selected = item == selectedItem,
+                    modifier = Modifier.size(
+                        width = 80.dp,
+                        height = 56.dp,
+                    )
+                ) {
+                    onSelect(item)
+                }
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun ButtonPreview() {
@@ -203,6 +307,7 @@ fun ButtonPreview() {
                 .padding(16.dp),
         ) {
             MainTextButton(text = "ボタン", onClick = { /*TODO*/ })
+            MainOutlinedTextButton(text = "ボタン", onClick = { /*TODO*/ })
             SubMainTextButton(text = "ボタン", onClick = { /*TODO*/ })
             GrayTextButton(text = "ボタン", onClick = { /*TODO*/ })
             BackNavigationButton {}

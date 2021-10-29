@@ -1,6 +1,6 @@
 package com.dawn.android.plan.domain.model
 
-import com.dawn.android.user.domain.model.Place
+import com.dawn.android.place.domain.model.Place
 
 data class Condition(
     val id: ConditionId,

@@ -1,4 +1,4 @@
-package com.dawn.android.user.domain.model
+package com.dawn.android.place.domain.model
 
 import com.dawn.android.plan.domain.model.PlaceId
 

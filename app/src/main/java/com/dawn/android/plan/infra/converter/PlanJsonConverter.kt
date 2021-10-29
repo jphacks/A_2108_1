@@ -1,13 +1,11 @@
 package com.dawn.android.plan.infra.converter
 
-import com.dawn.android.plan.domain.model.Address
+import com.dawn.android.place.domain.model.Address
 import com.dawn.android.plan.domain.model.Category
 import com.dawn.android.plan.domain.model.CategoryId
 import com.dawn.android.plan.domain.model.Condition
 import com.dawn.android.plan.domain.model.ConditionId
 import com.dawn.android.plan.domain.model.Day
-import com.dawn.android.user.domain.model.Place
-import com.dawn.android.plan.domain.model.PlaceId
 import com.dawn.android.plan.domain.model.Plan
 import com.dawn.android.plan.domain.model.PlanDetail
 import com.dawn.android.plan.domain.model.PlanId
@@ -16,11 +14,11 @@ import com.dawn.android.plan.domain.model.Season
 import com.dawn.android.plan.domain.model.SeasonId
 import com.dawn.android.plan.domain.model.TimeSpan
 import com.dawn.android.plan.domain.model.TimeSpanId
-import com.dawn.android.plan.infra.api.json.AddressJson
+import com.dawn.android.place.infra.api.json.AddressJson
+import com.dawn.android.place.infra.converter.PlaceJsonConverter
 import com.dawn.android.plan.infra.api.json.CategoryJson
 import com.dawn.android.plan.infra.api.json.ConditionJson
 import com.dawn.android.plan.infra.api.json.DayJson
-import com.dawn.android.user.infra.api.json.PlaceJson
 import com.dawn.android.plan.infra.api.json.PlanDetailJson
 import com.dawn.android.plan.infra.api.json.PlanJson
 import com.dawn.android.plan.infra.api.json.PlanScheduleJson
@@ -63,12 +61,6 @@ object PlanJsonConverter {
         )
     }
 
-    fun convertToDomainModel(json: AddressJson): Address {
-        return Address(
-            plusCode = json.plusCode,
-        )
-    }
-
     fun convertToDomainModel(json: DayJson): Day {
         val schedules = (json.headings + json.schedule)
             .sortedBy { it.order }
@@ -83,7 +75,7 @@ object PlanJsonConverter {
                             description = scheduleJson.description,
                             startTime = LocalTime.of(scheduleJson.startTime / 60, scheduleJson.startTime % 60),
                             endTime = LocalTime.of(scheduleJson.endTime / 60, scheduleJson.endTime % 60),
-                            address = scheduleJson.address?.let { convertToDomainModel(it) },
+                            address = scheduleJson.address?.let { PlaceJsonConverter.convertToDomainModel(it) },
                             hpLink = scheduleJson.hpLink,
                             reservationLink = scheduleJson.reservationLink,
                         )

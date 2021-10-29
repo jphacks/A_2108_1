@@ -7,4 +7,17 @@ data class Contact(
     val facebookLink: String?,
     val tiktokLink: String?,
     val biography: String,
-)
+) {
+    companion object {
+        fun empty(): Contact {
+            return Contact(
+                hpLink = null,
+                instagramLink = null,
+                twitterLink = null,
+                facebookLink = null,
+                tiktokLink = null,
+                biography = "",
+            )
+        }
+    }
+}

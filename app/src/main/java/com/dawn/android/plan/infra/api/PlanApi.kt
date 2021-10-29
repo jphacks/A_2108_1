@@ -9,7 +9,11 @@ class PlanApi(
     private val httpClient: HttpClient,
 ) {
     suspend fun getAllPlan(): List<PlanJson> {
-        return httpClient.get("/plan")
+        return try {
+            httpClient.get("/plan")
+        } catch (e: Exception) {
+            listOf()
+        }
     }
 
     suspend fun getPlanDetail(id: Long): PlanDetailJson {
