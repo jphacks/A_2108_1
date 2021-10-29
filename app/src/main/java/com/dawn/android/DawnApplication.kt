@@ -20,6 +20,7 @@ class DawnApplication : Application() {
                 planModule,
                 authModule,
                 userModule,
+                planModule,
             ).flatten()
             modules(modules)
         }
