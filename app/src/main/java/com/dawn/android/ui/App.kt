@@ -17,6 +17,8 @@ import com.dawn.android.plan.ui.HomePage
 import com.dawn.android.plan.ui.HomeViewModel
 import com.dawn.android.plan.ui.PlanNavItems
 import com.dawn.android.ui.theme.White
+import com.dawn.android.user.ui.mypage.MyPage
+import com.dawn.android.user.ui.mypage.MyPageViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -53,7 +55,8 @@ fun AppContent() {
                     HomePage(viewModel)
                 }
                 composable(route = BottomNavItems.MyPage.route) {
-
+                    val viewModel = getViewModel<MyPageViewModel>()
+                    MyPage(viewModel)
                 }
                 composable(route = PlanNavItems.PlanDetail.route + "/{${PlanNavItems.PlanDetail.planIdArg}}") { backStackEntry ->
                     val rawId = requireNotNull(backStackEntry.arguments?.getString(PlanNavItems.PlanDetail.planIdArg)).toLong()
