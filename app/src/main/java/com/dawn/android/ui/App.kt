@@ -16,6 +16,7 @@ import com.dawn.android.auth.ui.register.email.EmailRegistrationViewModel
 import com.dawn.android.auth.ui.register.email.emailpassword.EmailRegistrationAreaPage
 import com.dawn.android.auth.ui.register.email.emailpassword.EmailRegistrationBiographyPage
 import com.dawn.android.auth.ui.register.email.emailpassword.EmailRegistrationCityPage
+import com.dawn.android.auth.ui.register.email.emailpassword.EmailRegistrationContactPage
 import com.dawn.android.auth.ui.register.email.emailpassword.EmailRegistrationEmailPasswordNicknameUserIdPage
 import com.dawn.android.auth.ui.register.email.emailpassword.EmailRegistrationPrefecturePage
 import com.dawn.android.common.di.routeViewModel
@@ -105,6 +106,12 @@ fun AppContent() {
                         route = AuthNavItems.AccountInfo.route,
                     )
                     EmailRegistrationBiographyPage(viewModel)
+                }
+                composable(route = AuthNavItems.Contact.route) {
+                    val viewModel = navController.routeViewModel<EmailRegistrationViewModel>(
+                        route = AuthNavItems.AccountInfo.route,
+                    )
+                    EmailRegistrationContactPage(viewModel)
                 }
             }
         }
