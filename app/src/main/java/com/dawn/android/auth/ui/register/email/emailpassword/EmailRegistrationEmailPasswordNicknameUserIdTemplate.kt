@@ -92,11 +92,6 @@ fun EmailRegistrationEmailPasswordNicknameUserIdTemplate(
                     )
                     Spacer(modifier = Modifier.height(24.dp))
                     TextFieldLabel(text = "パスワード(6文字以上)")
-                    Text(
-                        text = "パスワード(6文字以上)",
-                        style = Typography.body2,
-                        color = Gray700,
-                    )
                     val (passwordVisible, setPasswordVisible) = remember {
                         mutableStateOf(false)
                     }
@@ -114,6 +109,7 @@ fun EmailRegistrationEmailPasswordNicknameUserIdTemplate(
                         onValueChange = setNickname,
                         maxCount = 20,
                         onLimitExceeded = { /*TODO*/ },
+                        modifier = Modifier.fillMaxWidth(),
                     )
                     Spacer(modifier = Modifier.height(24.dp))
                     TextFieldLabel(text = "ユーザID(3文字以上)")
@@ -122,8 +118,9 @@ fun EmailRegistrationEmailPasswordNicknameUserIdTemplate(
                         onValueChange = setUserId,
                         maxCount = 16,
                         onLimitExceeded = { /*TODO*/ },
+                        modifier = Modifier.fillMaxWidth(),
                     )
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(64.dp))
                 }
             }
             item {
