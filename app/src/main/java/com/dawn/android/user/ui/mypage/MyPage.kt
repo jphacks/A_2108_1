@@ -17,7 +17,7 @@ fun MyPage(
         }
         LoginStatus.NotLoggedIn -> {
             GuestTemplate {
-                
+
             }
         }
     }

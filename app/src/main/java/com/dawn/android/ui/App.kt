@@ -17,7 +17,6 @@ import com.dawn.android.plan.ui.HomePage
 import com.dawn.android.plan.ui.HomeViewModel
 import com.dawn.android.plan.ui.PlanNavItems
 import com.dawn.android.ui.theme.White
-import com.dawn.android.user.ui.UserNavItems
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -63,12 +62,6 @@ fun AppContent() {
                         parametersOf(id)
                     }
                     PlanDetailPage(viewModel)
-                }
-                composable(route = UserNavItems.CheckLoginStatus.route) {
-
-                }
-                composable(route = UserNavItems.Guest.route) {
-                    
                 }
             }
         }
