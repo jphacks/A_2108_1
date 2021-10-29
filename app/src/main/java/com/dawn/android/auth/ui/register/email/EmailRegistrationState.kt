@@ -221,7 +221,9 @@ sealed interface EmailRegistrationState {
                 displayName = nickname,
                 dateOfBirth = LocalDate.of(2000, 1, 1), // TODO
                 sex = Sex.Male, // TODO
-                contact = contact,
+                contact = contact.copy(
+                    biography = biography,
+                ),
                 place = place,
             )
         }
