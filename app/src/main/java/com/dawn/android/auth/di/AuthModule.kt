@@ -17,7 +17,7 @@ private val infraModule = module {
 
 private val uiModule = module {
     viewModel {
-        EmailRegistrationViewModel(get())
+        EmailRegistrationViewModel(get(), get())
     }
 }
 
