@@ -15,8 +15,11 @@ fun EmailRegistrationAreaPage(
     EmailRegistrationAreaTemplate(
         areas = areas,
         onClickBack = {
-            navController.navigate(AuthNavItems.Prefecture.route)
+            navController.popBackStack()
         },
-        onClickArea = viewModel::area,
+        onClickArea = { area ->
+            viewModel.area(area)
+            navController.navigate(AuthNavItems.Prefecture.route)
+        }
     )
 }

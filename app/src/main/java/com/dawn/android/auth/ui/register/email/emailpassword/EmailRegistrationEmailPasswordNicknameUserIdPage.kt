@@ -12,8 +12,11 @@ fun EmailRegistrationEmailPasswordNicknameUserIdPage(
     val navController = LocalNav.current
     EmailRegistrationEmailPasswordNicknameUserIdTemplate(
         onClickBack = {
-            navController.navigate(AuthNavItems.Area.route)
+            navController.popBackStack()
         },
-        onClickNext = viewModel::accountInfo,
+        onClickNext = { email, password, nickname, userId ->
+            viewModel.accountInfo(email, password, nickname, userId)
+            navController.navigate(AuthNavItems.Area.route)
+        }
     )
 }
