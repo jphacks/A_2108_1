@@ -41,7 +41,8 @@ import com.dawn.android.ui.theme.White
 fun MainTextButton(
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
 ) {
     TextButton(
         onClick = onClick,
@@ -49,10 +50,11 @@ fun MainTextButton(
         colors = ButtonDefaults.buttonColors(
             backgroundColor = MainColor,
             contentColor = Gray900,
-            disabledBackgroundColor = SubMainColor,
-            disabledContentColor = Gray700,
+            disabledBackgroundColor = Gray500,
+            disabledContentColor = Gray900,
         ),
         shape = Shapes.medium,
+        enabled = enabled,
     ) {
         Text(
             text = text,
