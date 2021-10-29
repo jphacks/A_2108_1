@@ -13,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.dawn.android.auth.ui.AuthNavItems
 import com.dawn.android.auth.ui.register.RegisterEntryPage
 import com.dawn.android.auth.ui.register.email.EmailRegistrationViewModel
+import com.dawn.android.auth.ui.register.email.RegisterDonePage
 import com.dawn.android.auth.ui.register.email.emailpassword.EmailRegistrationAreaPage
 import com.dawn.android.auth.ui.register.email.emailpassword.EmailRegistrationBiographyPage
 import com.dawn.android.auth.ui.register.email.emailpassword.EmailRegistrationCityPage
@@ -112,6 +113,9 @@ fun AppContent() {
                         route = AuthNavItems.AccountInfo.route,
                     )
                     EmailRegistrationContactPage(viewModel)
+                }
+                composable(route = AuthNavItems.RegisterDone.route) {
+                    RegisterDonePage()
                 }
             }
         }
