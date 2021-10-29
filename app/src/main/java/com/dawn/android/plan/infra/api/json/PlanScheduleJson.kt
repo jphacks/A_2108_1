@@ -1,5 +1,6 @@
 package com.dawn.android.plan.infra.api.json
 
+import com.dawn.android.place.infra.api.json.AddressJson
 import kotlinx.serialization.Serializable
 
 sealed interface PlanScheduleJson {

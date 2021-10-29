@@ -1,5 +1,6 @@
 package com.dawn.android.plan.domain.model
 
+import com.dawn.android.place.domain.model.Address
 import java.time.LocalTime
 
 sealed interface PlanSchedule {

@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.dawn.android.common.ui.BackNavigationButton
 import com.dawn.android.common.ui.SelectableSection
 import com.dawn.android.common.ui.TopBar
-import com.dawn.android.user.domain.model.Area
+import com.dawn.android.place.domain.model.Area
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

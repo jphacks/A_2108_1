@@ -25,10 +25,9 @@ import com.dawn.android.common.ui.PasswordSingleLineGrayTextField
 import com.dawn.android.common.ui.TopBar
 import com.dawn.android.ui.theme.Gray700
 import com.dawn.android.ui.theme.Typography
-import com.dawn.android.user.domain.model.Area
-import com.dawn.android.user.domain.model.City
+import com.dawn.android.place.domain.model.City
 import com.dawn.android.user.domain.model.Contact
-import com.dawn.android.user.domain.model.Prefecture
+import com.dawn.android.place.domain.model.Prefecture
 
 @Composable
 fun EmailRegistrationEmailPasswordNicknameUserIdTemplate(

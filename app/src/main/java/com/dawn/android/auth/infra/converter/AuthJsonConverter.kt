@@ -8,6 +8,7 @@ import com.dawn.android.common.ui.toRFC3339
 import com.dawn.android.user.domain.model.Sex
 import com.dawn.android.auth.infra.api.json.TokenJson
 import com.dawn.android.auth.infra.api.json.UserRegistrationJson
+import com.dawn.android.place.infra.converter.PlaceJsonConverter
 import com.dawn.android.user.infra.converter.UserJsonConverter
 
 object AuthJsonConverter {
@@ -36,7 +37,7 @@ object AuthJsonConverter {
                 Sex.Other -> 2
             },
             contacts = UserJsonConverter.convertToJson(model.contact),
-            address = UserJsonConverter.convertToJson(model.place),
+            address = PlaceJsonConverter.convertToJson(model.place),
         )
     }
 }

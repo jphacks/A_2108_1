@@ -6,11 +6,11 @@ import com.dawn.android.user.domain.model.Creator
 import com.dawn.android.user.domain.model.CreatorId
 import com.dawn.android.user.domain.model.Job
 import com.dawn.android.user.domain.model.JobId
-import com.dawn.android.user.domain.model.Place
+import com.dawn.android.place.domain.model.Place
 import com.dawn.android.user.infra.api.json.ContactJson
 import com.dawn.android.user.infra.api.json.JobJson
 import com.dawn.android.user.infra.api.json.CreatorUserJson
-import com.dawn.android.user.infra.api.json.PlaceJson
+import com.dawn.android.place.infra.api.json.PlaceJson
 import java.time.Instant
 
 object UserJsonConverter {
@@ -61,16 +61,6 @@ object UserJsonConverter {
             facebookLink = model.facebookLink,
             tiktokLink = model.tiktokLink,
             biography = model.biography,
-        )
-    }
-
-    fun convertToJson(model: Place): PlaceJson {
-        return PlaceJson(
-            id = model.id.value,
-            area = model.area,
-            prefecture = model.prefecture,
-            city = model.city,
-            name = model.name,
         )
     }
 }

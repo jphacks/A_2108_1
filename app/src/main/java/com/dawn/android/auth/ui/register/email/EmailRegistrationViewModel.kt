@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.dawn.android.auth.domain.model.RegistrationResult
 import com.dawn.android.auth.domain.model.UserRegistration
 import com.dawn.android.auth.domain.service.AccountService
-import com.dawn.android.user.domain.model.Area
-import com.dawn.android.user.domain.model.City
+import com.dawn.android.place.domain.model.Area
+import com.dawn.android.place.domain.model.City
 import com.dawn.android.user.domain.model.Contact
-import com.dawn.android.user.domain.model.Prefecture
+import com.dawn.android.place.domain.model.Prefecture
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

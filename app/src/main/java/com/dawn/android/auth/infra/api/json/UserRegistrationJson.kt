@@ -1,7 +1,7 @@
 package com.dawn.android.auth.infra.api.json
 
 import com.dawn.android.user.infra.api.json.ContactJson
-import com.dawn.android.user.infra.api.json.PlaceJson
+import com.dawn.android.place.infra.api.json.PlaceJson
 import kotlinx.serialization.Serializable
 
 @Serializable

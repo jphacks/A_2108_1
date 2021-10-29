@@ -1,4 +1,4 @@
-package com.dawn.android.plan.domain.model
+package com.dawn.android.place.domain.model
 
 data class Address(
     val plusCode: String,
