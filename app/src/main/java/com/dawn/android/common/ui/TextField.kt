@@ -1,6 +1,7 @@
 package com.dawn.android.common.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -251,7 +252,12 @@ private fun BaseWhiteTextField(
     TextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = modifier,
+        modifier = modifier
+            .border(
+                width = 1.dp,
+                color = Gray500,
+                shape = Shapes.small,
+            ),
         textStyle = textStyle,
         placeholder = placeholder?.let { {
             Placeholder(text = it)
@@ -312,6 +318,10 @@ fun TextFieldPreview() {
                 onValueChange = {},
                 passwordVisible = true,
                 onChangePasswordVisible = {}
+            )
+            NoLimitSingleLineWhiteTextField(
+                value = "hogehoge",
+                onValueChange = {},
             )
             LimitedMultiLineGrayTextField(
                 value = "１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０",
