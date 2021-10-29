@@ -2,10 +2,12 @@ package com.dawn.android.common.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
@@ -226,7 +228,36 @@ fun BookmarkButton(
     }
 }
 
-
+@Composable
+fun SelectableButton(
+    text: String,
+    selected: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .selectable(
+                selected = selected,
+                onClick = onClick,
+            )
+            .background(
+                color = if (selected) {
+                    MainColor
+                } else {
+                    Gray200
+                },
+                shape = Shapes.medium,
+            ),
+    ) {
+        Text(
+            text = text,
+            style = Typography.h6,
+            color = Gray900,
+        )
+    }
+}
 
 @Preview
 @Composable
