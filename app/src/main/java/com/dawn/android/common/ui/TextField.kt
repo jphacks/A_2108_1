@@ -1,7 +1,9 @@
 package com.dawn.android.common.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -13,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -125,6 +128,60 @@ fun PasswordSingleLineGrayTextField(
 }
 
 @Composable
+fun LimitedMultiLineGrayTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    maxCount: Int,
+    onLimitExceeded: () -> Unit,
+    modifier: Modifier = Modifier,
+    placeholder: String? = null,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+) {
+    val limitExceeded = value.length > maxCount
+    if (limitExceeded) {
+        onLimitExceeded()
+    }
+    Box(
+        contentAlignment = Alignment.BottomEnd,
+        modifier = modifier
+            .background(
+                color = Gray200,
+                shape = Shapes.medium,
+            )
+    ) {
+        TextField(
+            value = value,
+            onValueChange = onValueChange,
+            textStyle = Typography.body1,
+            placeholder = placeholder?.let { {
+                Placeholder(text = it)
+            } },
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = Gray900,
+                backgroundColor = Gray200,
+                focusedIndicatorColor = BackgroundColor,
+                unfocusedIndicatorColor = BackgroundColor,
+                disabledIndicatorColor = BackgroundColor,
+                errorIndicatorColor = BackgroundColor,
+                placeholderColor = Gray500,
+            ),
+            keyboardOptions = keyboardOptions,
+            shape = Shapes.medium,
+            modifier = Modifier.fillMaxSize(),
+        )
+        Text(
+            text = "${value.length}/$maxCount",
+            style = Typography.body2,
+            color = if (limitExceeded) AccentRed else Gray500,
+            modifier = Modifier.padding(
+                end = 8.dp,
+                bottom = 8.dp,
+            ),
+        )
+    }
+}
+
+@Composable
 private fun BaseGrayTextField(
     value: String,
     onValueChange: (String) -> Unit,
@@ -200,6 +257,12 @@ fun TextFieldPreview() {
                 onValueChange = {},
                 passwordVisible = true,
                 onChangePasswordVisible = {}
+            )
+            LimitedMultiLineGrayTextField(
+                value = "１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０",
+                onValueChange = {},
+                maxCount = 120,
+                onLimitExceeded = {},
             )
         }
     }
