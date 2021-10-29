@@ -10,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dawn.android.auth.ui.AuthNavItems
+import com.dawn.android.auth.ui.register.RegisterEntryPage
 import com.dawn.android.plan.detail.ui.PlanDetailPage
 import com.dawn.android.plan.detail.ui.PlanDetailViewModel
 import com.dawn.android.plan.domain.model.PlanId
@@ -65,6 +67,9 @@ fun AppContent() {
                         parametersOf(id)
                     }
                     PlanDetailPage(viewModel)
+                }
+                composable(route = AuthNavItems.RegisterEntry.route) {
+                    RegisterEntryPage()
                 }
             }
         }

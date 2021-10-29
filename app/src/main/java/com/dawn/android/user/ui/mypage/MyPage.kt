@@ -3,6 +3,7 @@ package com.dawn.android.user.ui.mypage
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import com.dawn.android.auth.domain.model.LoginStatus
+import com.dawn.android.auth.ui.AuthNavItems
 import com.dawn.android.ui.LocalNav
 
 @Composable
@@ -17,7 +18,7 @@ fun MyPage(
         }
         LoginStatus.NotLoggedIn -> {
             GuestTemplate {
-
+                navController.navigate(AuthNavItems.RegisterEntry.route)
             }
         }
     }
