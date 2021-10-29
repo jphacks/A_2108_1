@@ -9,15 +9,26 @@ import com.dawn.android.place.domain.model.Area
 import com.dawn.android.place.domain.model.City
 import com.dawn.android.user.domain.model.Contact
 import com.dawn.android.place.domain.model.Prefecture
+import com.dawn.android.place.domain.repository.PlaceRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class EmailRegistrationViewModel(
     private val accountService: AccountService,
+    private val placeRepository: PlaceRepository,
 ) : ViewModel() {
     private val _currentState = MutableStateFlow<EmailRegistrationState>(EmailRegistrationState.Init)
     val currentState: StateFlow<EmailRegistrationState> get() = _currentState
+
+    private val _areas = MutableStateFlow(listOf<Area>())
+    val areas: StateFlow<List<Area>> get() = _areas
+
+    private val _prefectures = MutableStateFlow(listOf<Prefecture>())
+    val prefectures: StateFlow<List<Prefecture>> get() = _prefectures
+
+    private val _cities = MutableStateFlow(listOf<City>())
+    val cities: StateFlow<List<City>> get() = _cities
 
     private val _loading = MutableStateFlow(false)
     val loading get() = _loading
@@ -37,6 +48,11 @@ class EmailRegistrationViewModel(
             nickname,
             userId,
         )
+        viewModelScope.launch {
+            if (_areas.value.isEmpty()) {
+                _areas.value = placeRepository.getAreas()
+            }
+        }
     }
 
 //    fun emailPassword(
@@ -145,6 +161,9 @@ class EmailRegistrationViewModel(
 //
     fun area(area: Area) {
         viewModelScope.launch {
+            _prefectures.value = placeRepository.getPrefectures(area.id)
+        }
+        viewModelScope.launch {
             when (val state = currentState.value) {
                 is EmailRegistrationState.NicknameUserId -> {
                     _currentState.value = state.next(area)
@@ -188,6 +207,9 @@ class EmailRegistrationViewModel(
     }
 
     fun prefecture(prefecture: Prefecture) {
+        viewModelScope.launch {
+            _cities.value = placeRepository.getCities(prefecture.id)
+        }
         viewModelScope.launch {
             when (val state = currentState.value) {
                 is EmailRegistrationState.AddressArea -> {
