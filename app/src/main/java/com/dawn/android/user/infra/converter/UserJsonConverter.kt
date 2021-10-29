@@ -2,7 +2,6 @@ package com.dawn.android.user.infra.converter
 
 import com.dawn.android.plan.domain.model.PlaceId
 import com.dawn.android.user.domain.model.Contact
-import com.dawn.android.user.domain.model.Creator
 import com.dawn.android.user.domain.model.CreatorId
 import com.dawn.android.user.domain.model.Job
 import com.dawn.android.user.domain.model.JobId
@@ -11,6 +10,9 @@ import com.dawn.android.user.infra.api.json.ContactJson
 import com.dawn.android.user.infra.api.json.JobJson
 import com.dawn.android.user.infra.api.json.CreatorUserJson
 import com.dawn.android.place.infra.api.json.PlaceJson
+import com.dawn.android.user.domain.model.Creator
+import com.dawn.android.user.domain.model.OtherUser
+import com.dawn.android.user.domain.model.UserId
 import java.time.Instant
 
 object UserJsonConverter {
@@ -23,10 +25,14 @@ object UserJsonConverter {
     }
 
     fun convertToDomainModel(json: CreatorUserJson): Creator {
-        return Creator(
-            id = CreatorId(json.creator.id),
+        return OtherUser.TravelCreator(
+            userId = UserId(json.id),
+            userName = json.userName,
             imageUrl = json.imageUrl,
-            displayName = json.creator.realName,
+            displayName = json.displayName,
+            contacts = convertToDomainModel(json.contacts),
+            creatorId = CreatorId(json.creator.id),
+            realName = json.creator.realName,
             job = convertToDomainModel(json.creator.job),
         )
     }
