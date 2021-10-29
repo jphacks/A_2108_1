@@ -1,12 +1,16 @@
 package com.dawn.android.common.ui
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -256,6 +260,30 @@ fun SelectableButton(
             style = Typography.h6,
             color = Gray900,
         )
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun <T> SelectableSection(
+    items: List<T>,
+    selectedItem: T?,
+    modifier: Modifier = Modifier,
+    getText: (T) -> String,
+    onSelect: (T) -> Unit
+) {
+    LazyVerticalGrid(
+        cells = GridCells.Adaptive(minSize = 80.dp),
+        modifier = modifier,
+    ) {
+        items(items) { item ->
+            SelectableButton(
+                text = getText(item),
+                selected = item == selectedItem,
+            ) {
+                onSelect(item)
+            }
+        }
     }
 }
 
