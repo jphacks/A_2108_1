@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ConditionJson(
     val id: Long,
-    val season: List<SeasonJson>,
-    val timeSpan: List<TimeSpanJson>,
-    val category: List<CategoryJson>,
-    val place: List<PlaceJson>,
+    val season: List<SeasonJson>?,
+    val timeSpan: List<TimeSpanJson>?,
+    val category: List<CategoryJson>?,
+    val place: List<PlaceJson>?,
     val estimatedCost: Int,
 )

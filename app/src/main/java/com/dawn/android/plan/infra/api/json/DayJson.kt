@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class DayJson(
     val nthDay: Int,
-    val headings: List<PlanScheduleJson.Heading>,
-    val schedule: List<PlanScheduleJson.Section>,
+    val headings: List<PlanScheduleJson.Heading>?,
+    val schedule: List<PlanScheduleJson.Section>?,
 )
