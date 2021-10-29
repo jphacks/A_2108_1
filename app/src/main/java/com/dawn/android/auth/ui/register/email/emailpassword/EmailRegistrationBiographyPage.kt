@@ -15,6 +15,7 @@ fun EmailRegistrationBiographyPage(
             navController.popBackStack()
         },
         onClickNext = {
+            viewModel.biography(it)
             navController.navigate(AuthNavItems.Contact.route)
         }
     )

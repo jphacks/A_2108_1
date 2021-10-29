@@ -22,7 +22,7 @@ import com.dawn.android.ui.theme.DawnTheme
 @Composable
 fun EmailRegistrationBiographyTemplate(
     onClickBack: () -> Unit,
-    onClickNext: () -> Unit,
+    onClickNext: (String) -> Unit,
 ) {
     val (biography, setBiography) = remember {
         mutableStateOf("")
@@ -58,7 +58,9 @@ fun EmailRegistrationBiographyTemplate(
             Spacer(modifier = Modifier.height(64.dp))
             MainTextButton(
                 text = "次へ",
-                onClick = onClickNext,
+                onClick = {
+                    onClickNext(biography)
+                },
                 enabled = biography.isNotBlank() && biography.length <= 120,
                 modifier = Modifier
                     .padding(

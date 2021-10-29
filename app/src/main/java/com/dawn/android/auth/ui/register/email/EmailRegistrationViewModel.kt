@@ -329,7 +329,7 @@ class EmailRegistrationViewModel(
             }
             is RegistrationResult.Failure -> {
                 _loading.value = false
-                _finish.value = true
+                _finish.value = false
             }
         }
     }
