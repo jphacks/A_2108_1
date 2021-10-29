@@ -31,9 +31,9 @@ class PlaceRepositoryImpl(
             }
     }
 
-    override suspend fun getCities(prefectureId: Int): List<City> {
+    override suspend fun getCities(areaId: Int, prefectureId: Int): List<City> {
         return placeApi
-            .getCities(prefectureId)
+            .getCities(areaId, prefectureId)
             .map {
                 City(
                     id = it.city,

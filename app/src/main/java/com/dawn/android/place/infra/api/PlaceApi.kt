@@ -18,8 +18,9 @@ class PlaceApi(
         }
     }
 
-    suspend fun getCities(prefectureId: Int): List<PlaceJson> {
+    suspend fun getCities(areaId: Int, prefectureId: Int): List<PlaceJson> {
         return httpClient.get("/place") {
+            parameter("area", areaId)
             parameter("pref", prefectureId)
         }
     }

@@ -206,9 +206,9 @@ class EmailRegistrationViewModel(
         }
     }
 
-    fun prefecture(prefecture: Prefecture) {
+    fun prefecture(area: Area, prefecture: Prefecture) {
         viewModelScope.launch {
-            _cities.value = placeRepository.getCities(prefecture.id)
+            _cities.value = placeRepository.getCities(area.id, prefecture.id)
         }
         viewModelScope.launch {
             when (val state = currentState.value) {

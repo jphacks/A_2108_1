@@ -7,5 +7,5 @@ import com.dawn.android.place.domain.model.Prefecture
 interface PlaceRepository {
     suspend fun getAreas(): List<Area>
     suspend fun getPrefectures(areaId: Int): List<Prefecture>
-    suspend fun getCities(prefectureId: Int): List<City>
+    suspend fun getCities(areaId: Int,prefectureId: Int): List<City>
 }

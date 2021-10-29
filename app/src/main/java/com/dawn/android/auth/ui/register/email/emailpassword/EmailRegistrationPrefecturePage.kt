@@ -13,14 +13,15 @@ fun EmailRegistrationPrefecturePage(
     val navController = LocalNav.current
     val state = viewModel.currentState.collectAsState().value
     val prefectures = viewModel.prefectures.collectAsState().value
+    val area = state.area ?: return
     EmailRegistrationPrefectureTemplate(
-        area = state.area ?: return,
+        area = area,
         prefectures = prefectures,
         onClickBack = {
             navController.popBackStack()
         },
         onClickPrefecture = { prefecture ->
-            viewModel.prefecture(prefecture)
+            viewModel.prefecture(area, prefecture)
             navController.navigate(AuthNavItems.City.route)
         }
     )
