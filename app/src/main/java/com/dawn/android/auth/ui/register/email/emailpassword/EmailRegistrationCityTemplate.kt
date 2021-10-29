@@ -39,7 +39,7 @@ fun EmailRegistrationCityTemplate(
     prefecture: Prefecture,
     cities: List<City>,
     onClickBack: () -> Unit,
-    onClickNext: (Area, Prefecture, City) -> Unit,
+    onClickNext: (City) -> Unit,
 ) {
     val (city, setCity) = remember {
         mutableStateOf<City?>(null)
@@ -113,7 +113,7 @@ fun EmailRegistrationCityTemplate(
                 text = "次へ",
                 onClick = {
                     city?.let {
-                        onClickNext(area, prefecture, it)
+                        onClickNext(it)
                     }
                 },
                 enabled = city != null,
@@ -146,7 +146,7 @@ fun EmailRegistrationCityPreview() {
             prefecture = prefecture,
             cities = cities,
             onClickBack = { /*TODO*/ },
-            onClickNext = { area, prefecture, city ->  }
+            onClickNext = {}
         )
     }
 }
