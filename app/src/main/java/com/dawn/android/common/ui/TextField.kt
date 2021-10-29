@@ -49,7 +49,25 @@ fun NoLimitSingleLineGrayTextField(
         textStyle = Typography.h6,
         singleLine = true,
         keyboardOptions = keyboardOptions,
-        trailingIcon = {}
+    )
+}
+
+@Composable
+fun NoLimitSingleLineWhiteTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    placeholder: String? = null,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+) {
+    BaseWhiteTextField(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        placeholder = placeholder,
+        textStyle = Typography.body1,
+        singleLine = true,
+        keyboardOptions = keyboardOptions,
     )
 }
 
@@ -204,6 +222,43 @@ private fun BaseGrayTextField(
         colors = TextFieldDefaults.textFieldColors(
             textColor = Gray900,
             backgroundColor = Gray200,
+            focusedIndicatorColor = BackgroundColor,
+            unfocusedIndicatorColor = BackgroundColor,
+            disabledIndicatorColor = BackgroundColor,
+            errorIndicatorColor = BackgroundColor,
+            placeholderColor = Gray500,
+        ),
+        shape = Shapes.medium,
+        keyboardOptions = keyboardOptions,
+        singleLine = singleLine,
+        trailingIcon = trailingIcon,
+        visualTransformation = visualTransformation,
+    )
+}
+
+@Composable
+private fun BaseWhiteTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier,
+    textStyle: TextStyle,
+    placeholder: String?,
+    keyboardOptions: KeyboardOptions,
+    singleLine: Boolean,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None
+) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        textStyle = textStyle,
+        placeholder = placeholder?.let { {
+            Placeholder(text = it)
+        } },
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Gray900,
+            backgroundColor = White,
             focusedIndicatorColor = BackgroundColor,
             unfocusedIndicatorColor = BackgroundColor,
             disabledIndicatorColor = BackgroundColor,
