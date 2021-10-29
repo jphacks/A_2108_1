@@ -12,6 +12,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dawn.android.auth.ui.AuthNavItems
 import com.dawn.android.auth.ui.register.RegisterEntryPage
+import com.dawn.android.auth.ui.register.email.EmailRegistrationViewModel
+import com.dawn.android.auth.ui.register.email.emailpassword.EmailRegistrationEmailPasswordNicknameUserIdPage
+import com.dawn.android.common.di.routeViewModel
 import com.dawn.android.plan.detail.ui.PlanDetailPage
 import com.dawn.android.plan.detail.ui.PlanDetailViewModel
 import com.dawn.android.plan.domain.model.PlanId
@@ -70,6 +73,10 @@ fun AppContent() {
                 }
                 composable(route = AuthNavItems.RegisterEntry.route) {
                     RegisterEntryPage()
+                }
+                composable(route = AuthNavItems.AccountInfo.route) {
+                    val viewModel = navController.routeViewModel<EmailRegistrationViewModel>()
+                    EmailRegistrationEmailPasswordNicknameUserIdPage(viewModel)
                 }
             }
         }
