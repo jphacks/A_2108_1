@@ -11,12 +11,41 @@ import com.dawn.android.user.domain.model.Sex
 import java.time.LocalDate
 
 sealed interface EmailRegistrationState {
-    object Init : EmailRegistrationState
+
+    val email: String?
+    val password: String?
+    val nickname: String?
+    val userId: String?
+    val area: Area?
+    val prefecture: Prefecture?
+    val place: Place?
+    val biography: String?
+    val contact: Contact?
+
+    object Init : EmailRegistrationState {
+        override val email: String? = null
+        override val password: String? = null
+        override val nickname: String? = null
+        override val userId: String? = null
+        override val area: Area? = null
+        override val prefecture: Prefecture? = null
+        override val place: Place? = null
+        override val biography: String? = null
+        override val contact: Contact? = null
+    }
 
     data class EmailPassword(
-        val email: String,
-        val password: String,
+        override val email: String,
+        override val password: String,
     ) : EmailRegistrationState {
+        override val nickname: String? = null
+        override val userId: String? = null
+        override val area: Area? = null
+        override val prefecture: Prefecture? = null
+        override val place: Place? = null
+        override val biography: String? = null
+        override val contact: Contact? = null
+
         fun next(
             nickname: String,
             userId: String,
@@ -31,11 +60,17 @@ sealed interface EmailRegistrationState {
     }
 
     data class NicknameUserId(
-        val email: String,
-        val password: String,
-        val nickname: String,
-        val userId: String,
+        override val email: String,
+        override val password: String,
+        override val nickname: String,
+        override val userId: String,
     ) : EmailRegistrationState {
+        override val area: Area? = null
+        override val prefecture: Prefecture? = null
+        override val place: Place? = null
+        override val biography: String? = null
+        override val contact: Contact? = null
+
         fun next(
             area: Area,
         ): AddressArea {
@@ -50,12 +85,17 @@ sealed interface EmailRegistrationState {
     }
 
     data class AddressArea(
-        val email: String,
-        val password: String,
-        val nickname: String,
-        val userId: String,
-        val area: Area,
+        override val email: String,
+        override val password: String,
+        override val nickname: String,
+        override val userId: String,
+        override val area: Area,
     ) : EmailRegistrationState {
+        override val prefecture: Prefecture? = null
+        override val place: Place? = null
+        override val biography: String? = null
+        override val contact: Contact? = null
+
         fun next(
             prefecture: Prefecture,
         ): AddressPrefecture {
@@ -71,13 +111,17 @@ sealed interface EmailRegistrationState {
     }
 
     data class AddressPrefecture(
-        val email: String,
-        val password: String,
-        val nickname: String,
-        val userId: String,
-        val area: Area,
-        val prefecture: Prefecture,
+        override val email: String,
+        override val password: String,
+        override val nickname: String,
+        override val userId: String,
+        override val area: Area,
+        override val prefecture: Prefecture,
     ) : EmailRegistrationState {
+        override val place: Place? = null
+        override val biography: String? = null
+        override val contact: Contact? = null
+
         fun next(
             city: City,
         ): AddressPlace {
@@ -101,14 +145,17 @@ sealed interface EmailRegistrationState {
     }
 
     data class AddressPlace(
-        val email: String,
-        val password: String,
-        val nickname: String,
-        val userId: String,
-        val area: Area,
-        val prefecture: Prefecture,
-        val place: Place,
+        override val email: String,
+        override val password: String,
+        override val nickname: String,
+        override val userId: String,
+        override val area: Area,
+        override val prefecture: Prefecture,
+        override val place: Place,
     ) : EmailRegistrationState {
+        override val biography: String? = null
+        override val contact: Contact? = null
+
         fun next(
             biography: String,
         ): Biography {
@@ -126,15 +173,17 @@ sealed interface EmailRegistrationState {
     }
 
     data class Biography(
-        val email: String,
-        val password: String,
-        val nickname: String,
-        val userId: String,
-        val area: Area,
-        val prefecture: Prefecture,
-        val place: Place,
-        val biography: String,
+        override val email: String,
+        override val password: String,
+        override val nickname: String,
+        override val userId: String,
+        override val area: Area,
+        override val prefecture: Prefecture,
+        override val place: Place,
+        override val biography: String,
     ) : EmailRegistrationState {
+        override val contact: Contact? = null
+
         fun next(
             contact: Contact,
         ): Contacts {
@@ -153,15 +202,15 @@ sealed interface EmailRegistrationState {
     }
 
     data class Contacts(
-        val email: String,
-        val password: String,
-        val nickname: String,
-        val userId: String,
-        val area: Area,
-        val prefecture: Prefecture,
-        val place: Place,
-        val biography: String,
-        val contact: Contact,
+        override val email: String,
+        override val password: String,
+        override val nickname: String,
+        override val userId: String,
+        override val area: Area,
+        override val prefecture: Prefecture,
+        override val place: Place,
+        override val biography: String,
+        override val contact: Contact,
     ) : EmailRegistrationState {
         fun toUserRegistration(): UserRegistration {
             return UserRegistration(
