@@ -1,5 +1,6 @@
 package com.dawn.android.common.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,6 +10,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
@@ -56,6 +58,35 @@ fun MainTextButton(
             text = text,
             fontSize = 15.sp,
             fontWeight = FontWeight.Bold,
+        )
+    }
+}
+
+@Composable
+fun MainOutlinedTextButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    OutlinedButton(
+        onClick = onClick,
+        modifier = modifier,
+        elevation = ButtonDefaults.elevation(14.dp),
+        shape = Shapes.medium,
+        colors = ButtonDefaults.outlinedButtonColors(
+            backgroundColor = White,
+            contentColor = Gray900,
+        ),
+        border = BorderStroke(
+            width = 2.dp,
+            color = MainColor,
+        ),
+    ) {
+        Text(
+            text = text,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(vertical = 4.dp),
         )
     }
 }
@@ -193,6 +224,8 @@ fun BookmarkButton(
     }
 }
 
+
+
 @Preview
 @Composable
 fun ButtonPreview() {
@@ -203,6 +236,7 @@ fun ButtonPreview() {
                 .padding(16.dp),
         ) {
             MainTextButton(text = "ボタン", onClick = { /*TODO*/ })
+            MainOutlinedTextButton(text = "ボタン", onClick = { /*TODO*/ })
             SubMainTextButton(text = "ボタン", onClick = { /*TODO*/ })
             GrayTextButton(text = "ボタン", onClick = { /*TODO*/ })
             BackNavigationButton {}
