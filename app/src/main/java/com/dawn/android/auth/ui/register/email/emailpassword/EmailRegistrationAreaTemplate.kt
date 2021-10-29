@@ -12,11 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dawn.android.common.ui.BackNavigationButton
 import com.dawn.android.common.ui.SelectableSection
 import com.dawn.android.common.ui.TopBar
 import com.dawn.android.place.domain.model.Area
+import com.dawn.android.ui.theme.DawnTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -49,7 +51,7 @@ fun EmailRegistrationAreaTemplate(
                 selectedItem = area,
                 modifier = Modifier
                     .padding(
-                        horizontal = 36.dp,
+                        horizontal = 24.dp,
                     )
                     .fillMaxWidth(),
                 getText = { it.name },
@@ -59,5 +61,23 @@ fun EmailRegistrationAreaTemplate(
                 },
             )
         }
+    }
+}
+
+@Preview
+@Composable
+fun EmailRegistrationAreaPreview() {
+    DawnTheme {
+        val areas = listOf(
+            Area(0, "北海道"),
+            Area(1, "東北"),
+            Area(2, "関東"),
+            Area(3, "中部"),
+            Area(4, "近畿"),
+            Area(5, "中国"),
+            Area(6, "四国"),
+            Area(7, "九州")
+        )
+        EmailRegistrationAreaTemplate(areas = areas, onClickBack = { /*TODO*/ }, onClickArea = {})
     }
 }

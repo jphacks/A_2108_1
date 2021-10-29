@@ -273,15 +273,25 @@ fun <T> SelectableSection(
     onSelect: (T) -> Unit
 ) {
     LazyVerticalGrid(
-        cells = GridCells.Adaptive(minSize = 80.dp),
+        cells = GridCells.Adaptive(minSize = 92.dp),
         modifier = modifier,
     ) {
         items(items) { item ->
-            SelectableButton(
-                text = getText(item),
-                selected = item == selectedItem,
+            Box(
+                modifier = Modifier
+                    .padding(12.dp),
+                contentAlignment = Alignment.Center,
             ) {
-                onSelect(item)
+                SelectableButton(
+                    text = getText(item),
+                    selected = item == selectedItem,
+                    modifier = Modifier.size(
+                        width = 80.dp,
+                        height = 56.dp,
+                    )
+                ) {
+                    onSelect(item)
+                }
             }
         }
     }
