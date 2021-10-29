@@ -13,7 +13,7 @@ data class PlanDetailJson(
     @SerialName("image")
     val imageUrl: String,
     val creatorUser: CreatorUserJson,
-    val days: List<DayJson>,
+    val days: List<DayJson>?,
     val conditions: ConditionJson,
     val createdAt: String,
 )
