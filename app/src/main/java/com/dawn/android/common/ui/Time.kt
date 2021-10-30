@@ -21,7 +21,7 @@ fun LocalTime.colonFormat(): String {
 }
 
 fun Instant.toRFC3339(): String {
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
     return atZone(ZoneId.systemDefault()).format(formatter)
 }
 
@@ -30,6 +30,11 @@ fun LocalDate.toRFC3339(): String {
 }
 
 fun String.asRFC3339LocalDateTime(): LocalDateTime {
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'").withZone(ZoneId.systemDefault())
     return LocalDateTime.parse(this, formatter)
+}
+
+fun String.asRFC3339Instant(): Instant{
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'").withZone(ZoneId.systemDefault())
+    return Instant.from(formatter.parse(this))
 }
