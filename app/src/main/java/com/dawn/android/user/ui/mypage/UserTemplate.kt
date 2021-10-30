@@ -229,22 +229,22 @@ fun UserContent(
             style = Typography.body2,
             color = Gray700,
         )
-        if (user is User) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.LocationOn,
-                    contentDescription = null,
-                    tint = Gray900,
-                )
-                Text(
-                    text = user.place.name,
-                    style = Typography.body2,
-                    color = Gray900,
-                )
-            }
-        }
+//        if (user is User) {
+//            Row(
+//                verticalAlignment = Alignment.CenterVertically,
+//            ) {
+//                Icon(
+//                    imageVector = Icons.Outlined.LocationOn,
+//                    contentDescription = null,
+//                    tint = Gray900,
+//                )
+//                Text(
+//                    text = user.place.name,
+//                    style = Typography.body2,
+//                    color = Gray900,
+//                )
+//            }
+//        }
         Spacer(modifier = Modifier.height(16.dp))
         Column(
             modifier = Modifier
@@ -260,7 +260,13 @@ fun UserContent(
                 text = user.contacts.biography,
                 style = Typography.subtitle2,
                 color = Gray900,
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp,
+                        vertical = 8.dp,
+                    )
+                    .fillMaxWidth()
+                    .weight(1f),
             )
 //            val contacts = listOf(
 //                user.contacts.hpLink to Icons.Outlined.Link,
