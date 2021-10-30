@@ -11,14 +11,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dawn.android.common.ui.BackNavigationButton
 import com.dawn.android.common.ui.MainOutlinedTextButton
+import com.dawn.android.common.ui.TopBar
 import com.dawn.android.ui.theme.DawnTheme
 
 @Composable
 fun LoginEntryTemplate(
+    onClickBack: () -> Unit,
     onClickEmailLogin: () -> Unit,
 ) {
-    Scaffold {
+    Scaffold(
+        topBar = {
+            TopBar(
+                title = "ログイン",
+                navigationIcon = {
+                    BackNavigationButton {
+                        onClickBack()
+                    }
+                }
+            )
+        },
+    ) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -40,7 +54,7 @@ fun LoginEntryTemplate(
 @Composable
 fun LoginEntryPreview() {
     DawnTheme {
-        LoginEntryTemplate {
+        LoginEntryTemplate(onClickBack = { /*TODO*/ }) {
 
         }
     }

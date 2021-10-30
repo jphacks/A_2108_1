@@ -6,7 +6,10 @@ import com.dawn.android.ui.LocalNav
 @Composable
 fun LoginEntryPage() {
     val navController = LocalNav.current
-    LoginEntryTemplate {
-//        navController.navigate()
-    }
+    LoginEntryTemplate(
+        onClickBack = {
+            navController.popBackStack()
+        },
+        onClickEmailLogin = {},
+    )
 }
