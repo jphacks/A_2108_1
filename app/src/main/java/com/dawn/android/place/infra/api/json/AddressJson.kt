@@ -1,4 +1,4 @@
-package com.dawn.android.plan.infra.api.json
+package com.dawn.android.place.infra.api.json
 
 import kotlinx.serialization.Serializable
 
