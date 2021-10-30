@@ -33,8 +33,8 @@ class EmailLoginViewModel(
                 }
                 LoginStatus.NotLoggedIn -> {
                     _loading.value = false
-                    _message.value = "ログインに失敗しました"
                     _message.value = null
+                    _message.value = "ログインに失敗しました"
                 }
             }
         }
