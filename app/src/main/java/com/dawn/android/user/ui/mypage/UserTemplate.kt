@@ -260,7 +260,13 @@ fun UserContent(
                 text = user.contacts.biography,
                 style = Typography.subtitle2,
                 color = Gray900,
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp,
+                        vertical = 8.dp,
+                    )
+                    .fillMaxWidth()
+                    .weight(1f),
             )
 //            val contacts = listOf(
 //                user.contacts.hpLink to Icons.Outlined.Link,
