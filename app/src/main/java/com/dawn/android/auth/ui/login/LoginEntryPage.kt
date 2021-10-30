@@ -1,6 +1,7 @@
 package com.dawn.android.auth.ui.login
 
 import androidx.compose.runtime.Composable
+import com.dawn.android.auth.ui.AuthNavItems
 import com.dawn.android.ui.LocalNav
 
 @Composable
@@ -10,6 +11,8 @@ fun LoginEntryPage() {
         onClickBack = {
             navController.popBackStack()
         },
-        onClickEmailLogin = {},
+        onClickEmailLogin = {
+            navController.navigate(AuthNavItems.Login.EmailPassword.route)
+        },
     )
 }

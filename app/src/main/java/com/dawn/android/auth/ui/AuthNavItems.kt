@@ -12,5 +12,6 @@ sealed class AuthNavItems(val route: String) {
 
     sealed class Login(route: String) : AuthNavItems(route) {
         object Entry : Login("LoginEntry")
+        object EmailPassword : Login("LoginEmailPassword")
     }
 }

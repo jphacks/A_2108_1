@@ -13,6 +13,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dawn.android.auth.ui.AuthNavItems
 import com.dawn.android.auth.ui.login.LoginEntryPage
+import com.dawn.android.auth.ui.login.email.EmailLoginPage
+import com.dawn.android.auth.ui.login.email.EmailLoginViewModel
 import com.dawn.android.auth.ui.register.RegisterEntryPage
 import com.dawn.android.auth.ui.register.email.EmailRegistrationViewModel
 import com.dawn.android.auth.ui.register.email.RegisterDonePage
@@ -127,6 +129,10 @@ fun AppContent() {
                 }
                 composable(route = AuthNavItems.Login.Entry.route) {
                     LoginEntryPage()
+                }
+                composable(route = AuthNavItems.Login.EmailPassword.route) {
+                    val viewModel = getViewModel<EmailLoginViewModel>()
+                    EmailLoginPage(viewModel)
                 }
             }
         }
