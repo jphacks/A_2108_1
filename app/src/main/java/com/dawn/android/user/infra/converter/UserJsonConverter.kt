@@ -1,5 +1,6 @@
 package com.dawn.android.user.infra.converter
 
+import com.dawn.android.common.ui.asRFC3339LocalDateTime
 import com.dawn.android.plan.domain.model.PlaceId
 import com.dawn.android.user.domain.model.Contact
 import com.dawn.android.user.domain.model.CreatorId
@@ -62,7 +63,7 @@ object UserJsonConverter {
                 displayName = json.displayName,
                 contacts = convertToDomainModel(json.contacts),
                 email = json.email,
-                dateOfBirth = LocalDate.parse(json.dateOfBirth),
+                dateOfBirth = json.dateOfBirth.asRFC3339LocalDateTime().toLocalDate(),
                 sex = when (json.sex) {
                     0 -> Sex.Male
                     1 -> Sex.Female
