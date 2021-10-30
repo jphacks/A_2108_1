@@ -229,22 +229,22 @@ fun UserContent(
             style = Typography.body2,
             color = Gray700,
         )
-        if (user is User) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.LocationOn,
-                    contentDescription = null,
-                    tint = Gray900,
-                )
-                Text(
-                    text = user.place.name,
-                    style = Typography.body2,
-                    color = Gray900,
-                )
-            }
-        }
+//        if (user is User) {
+//            Row(
+//                verticalAlignment = Alignment.CenterVertically,
+//            ) {
+//                Icon(
+//                    imageVector = Icons.Outlined.LocationOn,
+//                    contentDescription = null,
+//                    tint = Gray900,
+//                )
+//                Text(
+//                    text = user.place.name,
+//                    style = Typography.body2,
+//                    color = Gray900,
+//                )
+//            }
+//        }
         Spacer(modifier = Modifier.height(16.dp))
         Column(
             modifier = Modifier
