@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dawn.android.auth.ui.AuthNavItems
+import com.dawn.android.auth.ui.login.LoginEntryPage
 import com.dawn.android.auth.ui.register.RegisterEntryPage
 import com.dawn.android.auth.ui.register.email.EmailRegistrationViewModel
 import com.dawn.android.auth.ui.register.email.RegisterDonePage
@@ -123,6 +124,9 @@ fun AppContent() {
                 }
                 composable(route = AuthNavItems.RegisterDone.route) {
                     RegisterDonePage()
+                }
+                composable(route = AuthNavItems.Login.Entry.route) {
+                    LoginEntryPage()
                 }
             }
         }

@@ -27,7 +27,7 @@ fun MyPage(
                     navController.navigate(AuthNavItems.RegisterEntry.route)
                 },
                 onClickLogin = {
-                    //
+                    navController.navigate(AuthNavItems.Login.Entry.route)
                 }
             )
         }
