@@ -22,9 +22,14 @@ fun MyPage(
             }
         }
         LoginStatus.NotLoggedIn -> {
-            GuestTemplate {
-                navController.navigate(AuthNavItems.RegisterEntry.route)
-            }
+            GuestTemplate(
+                onClickRegister = {
+                    navController.navigate(AuthNavItems.RegisterEntry.route)
+                },
+                onClickLogin = {
+                    //
+                }
+            )
         }
     }
 }
