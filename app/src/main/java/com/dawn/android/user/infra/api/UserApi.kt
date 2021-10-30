@@ -10,7 +10,7 @@ class UserApi(
 ) {
     suspend fun getMe(token: String): UserJson {
         return httpClient.get("/user") {
-            header("Authorization", "Bearer $token")
+            header("Authorization", token)
         }
     }
 }
