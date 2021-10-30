@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -64,6 +65,12 @@ fun AppContent() {
                 composable(route = BottomNavItems.Home.route) {
                     val viewModel = getViewModel<HomeViewModel>()
                     HomePage(viewModel)
+                }
+                composable(route = BottomNavItems.Search.route) {
+                    Text(text = "TBD")
+                }
+                composable(route = BottomNavItems.Favorite.route) {
+                    Text(text = "TBD")
                 }
                 composable(route = BottomNavItems.MyPage.route) {
                     val viewModel = getViewModel<MyPageViewModel>()
