@@ -11,9 +11,13 @@ import com.dawn.android.user.infra.api.json.JobJson
 import com.dawn.android.user.infra.api.json.CreatorUserJson
 import com.dawn.android.place.infra.api.json.PlaceJson
 import com.dawn.android.user.domain.model.Creator
+import com.dawn.android.user.domain.model.Me
 import com.dawn.android.user.domain.model.OtherUser
+import com.dawn.android.user.domain.model.Sex
 import com.dawn.android.user.domain.model.UserId
+import com.dawn.android.user.infra.api.json.UserJson
 import java.time.Instant
+import java.time.LocalDate
 
 object UserJsonConverter {
     fun convertToDomainModel(json: JobJson): Job {
@@ -46,6 +50,48 @@ object UserJsonConverter {
             tiktokLink = json.tiktokLink,
             biography = json.biography ?: "",
         )
+    }
+
+    fun convertToMeDomainModel(json: UserJson): Me {
+        val creator = json.creator
+        return if (creator != null) {
+            Me.TravelCreator(
+                userId = UserId(json.id),
+                userName = json.userName,
+                imageUrl = json.imageUrl,
+                displayName = json.displayName,
+                contacts = convertToDomainModel(json.contacts),
+                email = json.email,
+                dateOfBirth = LocalDate.parse(json.dateOfBirth),
+                sex = when (json.sex) {
+                    0 -> Sex.Male
+                    1 -> Sex.Female
+                    2 -> Sex.Other
+                    else -> Sex.Other
+                },
+                place = convertToDomainModel(json.address),
+                creatorId = CreatorId(creator.id),
+                realName = creator.realName,
+                job = convertToDomainModel(creator.job),
+            )
+        } else {
+            Me.Normal(
+                userId = UserId(json.id),
+                userName = json.userName,
+                imageUrl = json.imageUrl,
+                displayName = json.displayName,
+                contacts = convertToDomainModel(json.contacts),
+                email = json.email,
+                dateOfBirth = LocalDate.parse(json.dateOfBirth),
+                sex = when (json.sex) {
+                    0 -> Sex.Male
+                    1 -> Sex.Female
+                    2 -> Sex.Other
+                    else -> Sex.Other
+                },
+                place = convertToDomainModel(json.address),
+            )
+        }
     }
 
     fun convertToDomainModel(json: PlaceJson): Place {

@@ -12,9 +12,14 @@ fun MyPage(
 ) {
     val navController = LocalNav.current
     val loginStatus = viewModel.loginStatus.collectAsState().value
+    val me = viewModel.me.collectAsState().value
     when (loginStatus) {
         is LoginStatus.LoggedIn -> {
-            MyPageTemplate()
+            if (me != null) {
+                MyPageTemplate(me)
+            } else {
+                viewModel.refreshMe()
+            }
         }
         LoginStatus.NotLoggedIn -> {
             GuestTemplate {
