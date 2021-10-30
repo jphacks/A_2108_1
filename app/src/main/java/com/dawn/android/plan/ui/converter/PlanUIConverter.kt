@@ -66,6 +66,6 @@ object PlanUIConverter {
     private fun toJobExperienceYears(dateOfFirstJob: Instant): Int {
         val now = Instant.now()
         val duration = Duration.between(dateOfFirstJob, now)
-        return duration.toDays().toInt() % 365
+        return duration.toDays().toInt() / 365
     }
 }

@@ -1,5 +1,6 @@
 package com.dawn.android.user.infra.converter
 
+import com.dawn.android.common.ui.asRFC3339Instant
 import com.dawn.android.common.ui.asRFC3339LocalDateTime
 import com.dawn.android.plan.domain.model.PlaceId
 import com.dawn.android.user.domain.model.Contact
@@ -17,15 +18,13 @@ import com.dawn.android.user.domain.model.OtherUser
 import com.dawn.android.user.domain.model.Sex
 import com.dawn.android.user.domain.model.UserId
 import com.dawn.android.user.infra.api.json.UserJson
-import java.time.Instant
-import java.time.LocalDate
 
 object UserJsonConverter {
     fun convertToDomainModel(json: JobJson): Job {
         return Job(
             id = JobId(json.id),
             jobName = json.jobName,
-            dateOfFirstJob = Instant.parse(json.dateOfFirstJob),
+            dateOfFirstJob = json.dateOfFirstJob.asRFC3339Instant(),
         )
     }
 
@@ -83,7 +82,7 @@ object UserJsonConverter {
                 displayName = json.displayName,
                 contacts = convertToDomainModel(json.contacts),
                 email = json.email,
-                dateOfBirth = LocalDate.parse(json.dateOfBirth),
+                dateOfBirth = json.dateOfBirth.asRFC3339LocalDateTime().toLocalDate(),
                 sex = when (json.sex) {
                     0 -> Sex.Male
                     1 -> Sex.Female

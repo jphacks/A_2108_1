@@ -1,5 +1,7 @@
 package com.dawn.android.plan.infra.converter
 
+import com.dawn.android.common.ui.asRFC3339Instant
+import com.dawn.android.common.ui.asRFC3339LocalDateTime
 import com.dawn.android.plan.domain.model.Category
 import com.dawn.android.plan.domain.model.CategoryId
 import com.dawn.android.plan.domain.model.Condition
@@ -97,7 +99,7 @@ object PlanJsonConverter {
             creator = UserJsonConverter.convertToDomainModel(json.creatorUser),
             days = json.days?.map { convertToDomainModel(it) } ?: listOf(),
             condition = convertToDomainModel(json.conditions),
-            createdAt = Instant.parse(json.createdAt),
+            createdAt = json.createdAt.asRFC3339Instant(),
         )
     }
 
@@ -108,7 +110,7 @@ object PlanJsonConverter {
             description = json.description,
             imageUrl = json.imageUrl,
             creator = UserJsonConverter.convertToDomainModel(json.creator),
-            createdAt = Instant.parse(json.createdAt),
+            createdAt = json.createdAt.asRFC3339Instant(),
         )
     }
 }
