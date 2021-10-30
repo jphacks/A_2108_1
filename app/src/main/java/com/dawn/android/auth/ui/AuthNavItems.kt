@@ -9,4 +9,9 @@ sealed class AuthNavItems(val route: String) {
     object Biography : AuthNavItems("Biography")
     object Contact : AuthNavItems("Contact")
     object RegisterDone : AuthNavItems("RegisterDone")
+
+    sealed class Login(route: String) : AuthNavItems(route) {
+        object Entry : Login("LoginEntry")
+        object EmailPassword : Login("LoginEmailPassword")
+    }
 }

@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dawn.android.common.ui.MainTextButton
+import com.dawn.android.common.ui.SubMainTextButton
 import com.dawn.android.common.ui.TopBar
 import com.dawn.android.ui.theme.DawnTheme
 import com.dawn.android.ui.theme.Gray500
@@ -29,6 +30,7 @@ import com.dawn.android.ui.theme.White
 @Composable
 fun GuestTemplate(
     onClickRegister: () -> Unit,
+    onClickLogin: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -83,6 +85,15 @@ fun GuestTemplate(
                         .fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(24.dp))
+                SubMainTextButton(
+                    text = "ログインする",
+                    onClick = onClickLogin,
+                    modifier = Modifier
+                        .padding(horizontal = 48.dp)
+                        .height(48.dp)
+                        .fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.height(24.dp))
             }
         }
     }
@@ -92,7 +103,7 @@ fun GuestTemplate(
 @Composable
 fun GuestPreview() {
     DawnTheme {
-        GuestTemplate {
+        GuestTemplate(onClickRegister = { /*TODO*/ }) {
 
         }
     }
